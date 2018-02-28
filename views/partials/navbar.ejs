@@ -1,0 +1,44 @@
+<nav class="navbar primary is-fixed-top">
+  <div class="navbar-brand">
+    <strong class="navbar-item">
+      Humans of New York
+    </strong>
+    <div class="navbar-burger burger" data-target="open">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <div id="open" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" href="/">Home</a>
+    </div>
+
+    <div class="navbar-end">
+
+      <% if (typeof page !== 'undefined' && page === 'stories') { %>
+        <div class="navbar-item">
+          <div class="field has-addons">
+            <div class="control">
+              <input class="input" type="search" name="search" id="search" placeholder="Search Story...">
+            </div>
+          </div>
+        </div>
+      <% } %>
+
+      <div class="navbar-item">
+        <div class="field is-grouped">
+          <% if(!currentUser) { %>
+            <a class="navbar-item" href="/login">Login</a>
+            <a class="navbar-item" href="/register">Register</a>
+          <% } else { %>
+            <a class="navbar-item" href="/logout">Logout</a>
+          <% } %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</nav>
+

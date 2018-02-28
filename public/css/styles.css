@@ -1,0 +1,285 @@
+:root {
+  --btnPrimary: #ee534a;
+  --btnSecondary: #FFAB91;
+}
+
+* {
+  box-sizing: border-box; 
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.5;
+  overflow: hidden; 
+}
+
+.v-header {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  color: #fff; }
+
+.container {
+  max-width: 960px;
+  padding: 0 1rem 0 1rem;
+  margin: auto;
+  text-align: center; }
+
+.fullscreen-video-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden; 
+}
+
+.header-overlay {
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.55); 
+}
+
+.header-content {
+  z-index: 2; 
+}
+
+.header-content h1 {
+  font-size: 2.8rem;
+  margin-bottom: 0;
+  text-shadow: 1px 1px 1px #000; 
+}
+
+.header-content p {
+  font-size: 1.35rem;
+  padding-bottom: 2rem;
+  text-shadow: .5px .5px .5px #000; 
+}
+
+.header-content .btn {
+  background: var(--btnPrimary);
+  color: #fff;
+  font-size: 1.2rem;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-weight: bold; 
+}
+
+.btn:hover {
+  background: #fff;
+  color: var(--btnPrimary);
+  transition: background 1s cubic-bezier(0.215, 0.61, 0.355, 1); 
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #f4f4f4;
+  width: 100%;
+  margin: 5rem auto;
+  max-width: 600px;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
+  animation: openmodal .6s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+
+.modal-header {
+  padding: 1rem;
+  text-align: center;
+  background-color: var(--btnPrimary);
+  color: #fff;
+}
+
+.modal-header h2 {
+  margin: 0;
+}
+
+.modal-body > form .row {
+  padding: 1rem 1.4rem; 
+  text-align: center;
+}
+
+.modal-body label {
+  display: block;
+  text-align: left;
+}
+
+.modal-body input, .modal-body textarea {
+  border: 1px solid var(--btnPrimary);
+  width: 100%;
+  border-radius: .25rem;
+  font-size: 1.2rem;
+}
+
+.modal-body input:focus, .modal-body textarea:focus, input.input:focus {
+  outline: none;
+  box-shadow: 0px 0px 8px var(--btnPrimary);
+}
+
+.modal-body input {
+  height: 2rem;
+}
+
+.modal-body label {
+  font-weight: bold;
+}
+
+.modal-footer {
+  padding: .8rem;
+  text-align: right;
+  color: #fff;
+  background-color: var(--btnSecondary);
+}
+
+.cancel, .create {
+  border: 0;
+  background-color: #fff;
+  padding: .5rem 1rem; 
+  border-radius: .25rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cancel {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.cancel:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  transition: background-color 1s cubic-bezier(0.23, 1, 0.320, 1); 
+}
+
+.create:hover {
+  background-color: var(--btnPrimary);
+  color: #fff;
+  transition: color 1s cubic-bezier(0.23, 1, 0.320, 1); 
+}
+
+@keyframes openmodal {
+  from { opacity: 0 }
+  to  {opacity: 1 }
+}
+
+.closeBtn {
+  color: #fff;
+  font-size: 30px;
+  cursor: pointer;
+  float: right;
+  line-height: 1;
+}
+
+.closeBtn:hover, .closeBtn:focus {
+  color: #001;
+}
+
+.hero {
+  margin: 3.5rem 0 .5rem 0;
+}
+
+.section.mt {
+  margin-top: 2.5rem;
+}
+
+.left {
+  text-align: left;
+}
+
+.columns.mt {
+  margin-top: 6rem;
+}
+
+.bottom {
+  margin-top: .8rem;
+  float: left;
+}
+
+form.left {
+  display: inline;
+}
+
+button.primary {
+  background-color: var(--btnPrimary);
+  color: #fff;
+}
+
+nav.primary, button.primary, nav a.navbar-item, .navbar-menu {
+  background-color: var(--btnPrimary);
+}
+
+nav strong.navbar-item {
+  color: #424242;
+}
+
+nav a.navbar-item {
+  color: #fff;
+}
+
+button.primary:hover, button.primary:focus {
+  color: #fff;
+} 
+
+.micro {
+  float: right;
+  cursor: pointer;
+}
+
+.micro:hover {
+  color: #000;
+}
+
+.mb {
+  margin-bottom: 4rem;
+}
+
+#editCommentForm {
+  display: none;
+}
+
+#search:focus {
+  border: none;
+  box-shadow: inset 1px 1px 5px #000;
+}
+
+.back {
+  margin-top: 1rem;
+  float: left;
+  color: var(--btnSecondary);
+  font-size: 1.2rem;
+  text-indent: -5rem;
+}
+
+.back:hover {
+  color: var(--btnPrimary);
+}
+
+.notification {
+  margin: 4rem 0 -3rem 0;
+}
+
+@media (max-width: 960px) {
+  .container {
+    padding: 0 3rem 0 3rem; } 
+}
+
+@media (max-width: 500px) {
+  html {
+    font-size: 0.8rem;
+  }
+}

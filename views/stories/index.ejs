@@ -1,0 +1,84 @@
+<% include ../partials/header %>
+
+<% include ../partials/navbar %>
+
+<section class="hero is-dark">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        It's Your Turn!
+      </h1>
+        <button class="modalBtn button primary is-rounded" data-modal="newStoryModal">Tell Us Your Story</button>
+    </div>
+  </div>
+</section>
+
+<div class="container is-fluid mb">
+  <div class="columns is-multiline">
+    <% results.forEach(result =>  { %>
+      <div class="column is-one-quarter-desktop is-one-third-tablet">
+        <div class="card">
+          <div class="card-image">
+            <figure class="image is-4by3">
+              <img src="https://bulma.io/images/placeholders/1280x960.png" alt="">
+            </figure>
+          </div>
+          <div class="card-content">
+            <div class="media">
+              <div class="media-left">
+                <figure class="image is-48x48">
+                  <img src="https://bulma.io/images/placeholders/96x96.png" alt="">
+                </figure>
+              </div>
+              <div class="media-content">
+                <p class="title is-6"><%= result.stories.title.substring(0, 25) %></p>
+                <p class="subtitle is-7">@<%= result.users.username %></p>
+              </div>
+            </div>
+
+            <div class="content">
+              <p class="left"><%= result.stories.story.substring(0, 100)+'...' %></p>
+              <time datetime="2016-1-1"><%= result.stories.created_at.toString().substring(0, 16) %></time>
+            </div>
+            <a href="stories/<%= result.stories.id %>" class="button is-dark">Read More</a>
+          </div>
+        </div>
+
+      </div>
+    <% }); %>
+  </div>
+</div>
+
+<div id="newStoryModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="closeBtn">&times;</span>
+      <h2>Create Your Story</h2>
+    </div>
+
+    <div class="modal-body">
+      <form action="/stories" method="POST" id="newStoryForm">
+        <div class="row">
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title">
+        </div>
+        
+        <div class="row">
+          <label for="story">Story <span class="micro"><i class="fas fa-microphone"></i></span></label>
+          <textarea id="story" rows="8" name="story"></textarea>
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="cancel">Cancel</button>
+          <button type="submit" class="create">Create</button>
+          <% if(currentUser) { %>
+            <input type="hidden" name="user_id" value="<%= currentUser.user_id %>">
+          <% } %>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<% include ../partials/footer %>
+
