@@ -1,4 +1,4 @@
-# HumansOfNewYorkII
+# Humans Of New York II
 A yelp-like application from scratch using Bulma, Node, Express, MySQL, jQuery and Ajax.
 
 Assuming, You have node and npm properly installed on your machine, you need to:
