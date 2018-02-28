@@ -67,7 +67,7 @@
         <% } %>
       </div>
 
-      <% if(currentUser) { %>
+      <% if(currentUser && story[0].userId === currentUser.user_id) { %>
         <div class="media-right">
           <form action="/stories/<%= story[0].storyId%>/comments/<%= comment.id %>" method="POST" id="deleteCommentForm">
             <button type="submit" class="delete"></button>
