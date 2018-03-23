@@ -22,27 +22,27 @@ router.get('/register', (req, res) => {
   res.render('register', { page: 'register' });
 });
 
-// router.post('/register', (req, res) => {
-//   const username = req.body.rUsername,
-//     email = req.body.rEmail,
-//     password = req.body.rPassword;
+router.post('/register', (req, res) => {
+  const username = req.body.rUsername,
+    email = req.body.rEmail,
+    password = req.body.rPassword;
 
-//   const sql = 'INSERT INTO users (username, email, password) VALUES(?, ?, ?)';
+  const sql = 'INSERT INTO users (username, email, password) VALUES(?, ?, ?)';
 
-//   bcrypt.hash(password, saltRounds, function(err, hashPassword) {
-//     db.query(sql, [username, email, hashPassword], (err, results, fields) => {
+  bcrypt.hash(password, saltRounds, function(err, hashPassword) {
+    db.query(sql, [username, email, hashPassword], (err, results, fields) => {
 
-//       if(err) throw err;
-//       const sql2 = 'SELECT id, username FROM users WHERE id = ?';
-//       db.query(sql2, [results.insertId], (err, user) => {
-//         if(err) throw err;
-//         req.login(user, err => {
-//           res.redirect('/stories');
-//         }); // passport login function
-//       });
-//     });
-//   });
-// });
+      if(err) throw err;
+      const sql2 = 'SELECT id, username FROM users WHERE id = ?';
+      db.query(sql2, [results.insertId], (err, user) => {
+        if(err) throw err;
+        req.login(user, err => {
+          res.redirect('/stories');
+        }); // passport login function
+      });
+    });
+  });
+});
 
 router.get('/logout', (req, res) => {
   req.logout(); // passport logout method
