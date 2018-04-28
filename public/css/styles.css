@@ -219,8 +219,19 @@ button.primary {
   color: #fff;
 }
 
-nav.primary, button.primary, nav a.navbar-item, .navbar-menu {
+nav.primary, button.primary, nav a.navbar-item, .navbar-menu, a.primary {
   background-color: var(--btnPrimary);
+}
+
+a.primary {
+  padding: .8rem;
+  color: #fff;
+  display: inline-block;
+  text-decoration: none;
+  margin-top: 1rem;
+  border-radius: .25rem;
+  -webkit-clip-path: polygon(40% 0%, 40% 20%, 100% 20%, 100% 80%, 40% 80%, 40% 100%, 0% 50%);
+  clip-path: polygon(40% 0%, 40% 20%, 100% 20%, 100% 80%, 40% 80%, 40% 100%, 0% 50%);
 }
 
 nav strong.navbar-item {
@@ -271,6 +282,10 @@ button.primary:hover, button.primary:focus {
 
 .notification {
   margin: 4rem 0 -3rem 0;
+}
+
+.center {
+  text-align: center;
 }
 
 @media (max-width: 960px) {

@@ -71,4 +71,8 @@ app.use(indexRoutes);
 app.use('/stories', storiesRoutes);
 app.use('/stories/:id/comments', commentRoutes);
 
+app.get('*', (req, res) => {
+  res.render('404');
+});
+
 app.listen(3000, () => console.log("Simon's Server started..."));

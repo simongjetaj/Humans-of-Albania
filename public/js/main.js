@@ -182,7 +182,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Add a click event on each of them
     $navbarBurgers.forEach(function ($el) {
       $el.addEventListener('click', function () {
-
         // Get the target from the "data-target" attribute
         var target = $el.dataset.target;
         var $target = document.getElementById(target);
@@ -220,7 +219,6 @@ function handleCommentCreate(e) {
   const comment = $(this).serialize();
   const actionUrl = $(this).attr('action');
   $.post(`${actionUrl}`, comment, function(data) {
-    console.log(data)
     const output = `
       <article class="media">
       <figure class="media-left">
