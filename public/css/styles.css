@@ -288,6 +288,14 @@ button.primary:hover, button.primary:focus {
   text-align: center;
 }
 
+.footer-link {
+  color: #363636;
+}
+
+.footer-link:hover {
+  box-shadow: inset 0 0.6px 0 var(--btnPrimary), inset 0 -0.6px 0 var(--btnPrimary);
+}
+
 @media (max-width: 960px) {
   .container {
     padding: 0 3rem 0 3rem; } 
