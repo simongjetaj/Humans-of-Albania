@@ -288,6 +288,16 @@ button.primary:hover, button.primary:focus {
   text-align: center;
 }
 
+footer {
+  padding: 1.5em;
+}
+
+.fixed-footer {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+
 .footer-link {
   color: #363636;
 }
