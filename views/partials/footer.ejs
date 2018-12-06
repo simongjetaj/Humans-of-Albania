@@ -1,18 +1,19 @@
-  <% if (typeof page !== 'undefined' && page === 'stories') { %>
-    <footer class="has-text-centered">
-      <% include copyright %>
-    </footer>
-  <% } %> 
+<% if (typeof page !== 'undefined' && page === 'stories') { %>
+<footer class="has-text-centered">
+  <% include copyright %>
+</footer>
+<% } %>
 
-  <% if (typeof page !== 'undefined' && page === 'login' || typeof page !== 'undefined' && page === 'register') { %>
-    <footer class="fixed-footer center">
-      <% include copyright %>
-    </footer>
-  <% } %>
+<% if (typeof page !== 'undefined' && page === 'login' || typeof page !== 'undefined' && page === 'register') { %>
+<footer class="fixed-footer center">
+  <% include copyright %>
+</footer>
+<% } %>
 
-  <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="/public/js/main.js"></script>
-  </body>
+<script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/public/js/main.js"></script>
+</body>
+
 </html>

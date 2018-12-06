@@ -19,27 +19,27 @@
     <div class="navbar-end">
 
       <% if (typeof page !== 'undefined' && page === 'stories') { %>
-        <div class="navbar-item">
-          <div class="field has-addons">
-            <div class="control">
-              <input class="input" type="search" name="search" id="search" placeholder="Search Story...">
-            </div>
+      <div class="navbar-item">
+        <div class="field has-addons">
+          <div class="control">
+            <input class="input" type="search" name="search" id="search" placeholder="Search Story...">
           </div>
         </div>
+      </div>
       <% } %>
 
       <div class="navbar-item">
         <div class="field is-grouped">
           <% if(!currentUser) { %>
-            <a class="navbar-item" href="/login">Login</a>
-            <a class="navbar-item" href="/register">Register</a>
+          <a class="navbar-item" href="/login">Login</a>
+          <a class="navbar-item" href="/register">Register</a>
           <% } else { %>
-            <span class="navbar-item has-text-white">Hello, <%= currentUser.username %>!</span>
-            <a class="navbar-item" href="/logout">Logout</a>
+          <span class="navbar-item has-text-white">Hello,
+            <%= currentUser.username %>!</span>
+          <a class="navbar-item" href="/logout">Logout</a>
           <% } %>
         </div>
       </div>
     </div>
   </div>
 </nav>
-

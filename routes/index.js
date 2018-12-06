@@ -1,9 +1,10 @@
 const express = require('express'),
   router = express.Router(),
-  db = require('../db/db'),
   bcrypt = require('bcrypt'),
   saltRounds = 10,
   passport = require('passport');
+
+const db = require('../db/db');
 
 router.get('/', (req, res) => {
   res.render('index');
@@ -15,11 +16,15 @@ router.post('/login', passport.authenticate('local', {
 }));
 
 router.get('/login', (req, res) => {
-  res.render('login', { page: 'login' });
+  res.render('login', {
+    page: 'login'
+  });
 });
 
 router.get('/register', (req, res) => {
-  res.render('register', { page: 'register' });
+  res.render('register', {
+    page: 'register'
+  });
 });
 
 router.post('/register', (req, res) => {
@@ -29,13 +34,13 @@ router.post('/register', (req, res) => {
 
   const sql = 'INSERT INTO users (username, email, password) VALUES(?, ?, ?)';
 
-  bcrypt.hash(password, saltRounds, function(err, hashPassword) {
+  bcrypt.hash(password, saltRounds, function (err, hashPassword) {
     db.query(sql, [username, email, hashPassword], (err, results, fields) => {
 
-      if(err) throw err;
+      if (err) throw err;
       const sql2 = 'SELECT id, username FROM users WHERE id = ?';
       db.query(sql2, [results.insertId], (err, user) => {
-        if(err) throw err;
+        if (err) throw err;
         req.login(user, err => {
           res.redirect('/stories');
         }); // passport login function
@@ -53,17 +58,17 @@ router.get('/logout', (req, res) => {
   })
 });
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
   done(null, user);
 });
 
-passport.deserializeUser(function(user, done) {
-    done(null, user);
+passport.deserializeUser(function (user, done) {
+  done(null, user);
 });
 
 function isLoggedIn(req, res, next) {
-    if(req.isAuthenticated()) return next();
-    res.redirect('/login');
+  if (req.isAuthenticated()) return next();
+  res.redirect('/login');
 }
 
 module.exports = router;
