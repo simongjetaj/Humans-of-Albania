@@ -50,7 +50,7 @@
         </p>
       </div>
 
-      <% if(currentUser && currentUser.user_id === story[0].userId && comment.username === story[0].username) { %>
+      <% if(comment.username === currentUser.username || (currentUser && currentUser.user_id === story[0].userId && comment.username === story[0].username)) { %>
       <nav class="level is-mobile">
         <div class="level-left">
           <a class="level-item">
