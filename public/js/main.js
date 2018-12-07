@@ -7,7 +7,6 @@ modalBtns.forEach(modalBtn => {
   modalBtn.addEventListener('click', () => {
     const modal = modalBtn.getAttribute('data-modal');
     const createStoryMainBtn = modalBtn.getAttribute('data-notloggedin');
-    console.log(createStoryMainBtn)
     if (createStoryMainBtn === "true") {
       return window.location.replace("/login");
     }
@@ -40,6 +39,18 @@ $('#newStoryForm').submit(handleCreateStory);
 
 function handleCreateStory(e) {
   e.preventDefault();
+
+  const title = document.getElementById('title').value.trim();
+  const story = document.getElementById('story').value.trim();
+  if (!title || !story) {
+    const modalElement = document.getElementById('newStoryForm');
+
+    modalElement.insertAdjacentHTML('afterbegin', `
+    <div class="box has-text-centered" style="margin-top: .75rem">
+      <small class="has-text-danger"><i class="fas fa-exclamation-circle"></i> Please, fill all the required fields!</small>
+    </div>`);
+    return;
+  }
   const formData = $(this).serialize();
   $.post('/stories', formData, function (data) {
     const output = `
