@@ -1,11 +1,16 @@
 // MODALS FUNCTIONALITY
 const modalBtns = document.querySelectorAll('.modalBtn'),
-closeBtns       = document.querySelectorAll('.closeBtn'),
-cancelBtns      = document.querySelectorAll('.cancel');
+  closeBtns = document.querySelectorAll('.closeBtn'),
+  cancelBtns = document.querySelectorAll('.cancel');
 
 modalBtns.forEach(modalBtn => {
   modalBtn.addEventListener('click', () => {
     const modal = modalBtn.getAttribute('data-modal');
+    const createStoryMainBtn = modalBtn.getAttribute('data-notloggedin');
+    console.log(createStoryMainBtn)
+    if (createStoryMainBtn === "true") {
+      return window.location.replace("/login");
+    }
     document.getElementById(modal).style.display = 'block';
   });
 });
@@ -36,7 +41,7 @@ $('#newStoryForm').submit(handleCreateStory);
 function handleCreateStory(e) {
   e.preventDefault();
   const formData = $(this).serialize();
-  $.post('/stories', formData, function(data) {
+  $.post('/stories', formData, function (data) {
     const output = `
       <div class="column is-one-quarter-desktop is-one-third-tablet">
       <div class="card">
@@ -60,7 +65,7 @@ function handleCreateStory(e) {
 
           <div class="content">
             <p class="left">${data[0].story.substring(0, 100)+'...'}</p>
-            <time datetime="2016-1-1">${data[0].created_at.toString().substring(0, 16)}</time>
+            <time datetime="2016-1-1">${moment(data[0].created_at).format('LLL')}</time>
           </div>
           <a href="stories/${data[0].storyId}" class="button is-dark">Read More</a>
         </div>
@@ -86,13 +91,13 @@ function handleUpdateStory(e) {
     url: actionUrl,
     data: formData,
     type: 'PUT',
-    success: function(data) {
+    success: function (data) {
       $('.title').html(data[0].title);
       $('.story').html(data[0].story);
       document.querySelector('.modal').style.display = "none";
       showNotification('Story has been updated successfully!', 'is-success');
     },
-    error: function(xhr, status, error) {
+    error: function (xhr, status, error) {
       document.querySelector('.modal').style.display = "none";
       showNotification(error, 'is-danger');
     }
@@ -106,18 +111,18 @@ $('#deleteStoryForm').on('submit', handleDeleteStory);
 function handleDeleteStory(e) {
   e.preventDefault();
   const confirmResponse = confirm('Are you sure you want to delete this item?');
-  if(confirmResponse) {
+  if (confirmResponse) {
     const actionUrl = $(this).attr('action');
     $.ajax({
       url: actionUrl,
       type: 'DELETE',
-      success: function(data) {
+      success: function (data) {
         window.location.href = "/stories";
         setTimeout(showNotification('Story has been deleted successfully!', 'is-success'),
-        600
+          600
         );
       },
-      error: function(xhr, status, error) {
+      error: function (xhr, status, error) {
         showNotification(error, 'is-danger');
       }
     });
@@ -129,10 +134,10 @@ $('#search').on('input', searchStories);
 
 function searchStories(e) {
   const url = `/stories?search=${encodeURIComponent(e.target.value)}`;
-  $.getJSON(url, function(data) {
+  $.getJSON(url, function (data) {
     $('.columns').html('');
-    
-    data.forEach(function(story) {
+
+    data.forEach(function (story) {
       let output = `
       <div class="column is-one-quarter-desktop is-one-third-tablet">
         <div class="card">
@@ -166,7 +171,7 @@ function searchStories(e) {
       `;
 
       $('.columns').append(output);
-      
+
     });
   });
 }
@@ -198,13 +203,13 @@ const recognition = new webkitSpeechRecognition();
 const micro = document.querySelector('span.micro');
 const story = document.getElementById('story');
 
-if(micro) {
-  micro.onclick = function() {
+if (micro) {
+  micro.onclick = function () {
     recognition.start();
   }
 }
 
-recognition.onresult = function(e) {
+recognition.onresult = function (e) {
   var textGenerated = e.results[0][0].transcript;
   story.textContent += textGenerated;
 }
@@ -218,7 +223,7 @@ function handleCommentCreate(e) {
 
   const comment = $(this).serialize();
   const actionUrl = $(this).attr('action');
-  $.post(`${actionUrl}`, comment, function(data) {
+  $.post(`${actionUrl}`, comment, function (data) {
     const output = `
       <article class="media">
       <figure class="media-left">
@@ -269,7 +274,7 @@ function handleCommentCreate(e) {
 }
 
 // HANDLE UPDATE COMMENT FUNCTIONALITY
-$('#comments').on('click', '.editCommentBtn', function() {
+$('#comments').on('click', '.editCommentBtn', function () {
   $(this).parents().eq(2).next().fadeToggle();
 });
 
@@ -287,11 +292,11 @@ function handleUpdateComment(e) {
     url: actionUrl,
     data: commentData,
     type: 'PUT',
-    success: function(data) {
-      $itemToUpdate.html(data[0].comment); 
+    success: function (data) {
+      $itemToUpdate.html(data[0].comment);
       editCommentForm.fadeToggle(); // close form editing when comment update successfully
     },
-    error: function(xhr, status, error) {
+    error: function (xhr, status, error) {
       showNotification(error, 'is-danger');
     }
   });
@@ -305,15 +310,15 @@ function handleDeleteComment(e) {
   e.preventDefault();
   const confirmResponse = confirm('Are you sure you want to delete this comment?');
   const $commentToDelete = $(this).parents('.media');
-  if(confirmResponse) {
+  if (confirmResponse) {
     const actionUrl = $(this).attr('action');
     $.ajax({
       url: actionUrl,
       type: 'DELETE',
-      success: function(data) {
+      success: function (data) {
         $commentToDelete.remove();
       },
-      error: function(xhr, status, error) {
+      error: function (xhr, status, error) {
         showNotification(error, 'is-danger');
       }
     });
@@ -334,10 +339,9 @@ function showNotification(message, color) {
 
   const removeElement = document.querySelector('.message');
   setTimeout(() => removeElement.remove(),
-3000);
+    3000);
 }
 
-$('body').on('click', '.deleteNotification', function() {
+$('body').on('click', '.deleteNotification', function () {
   $('.message').remove();
 });
-  

@@ -1,4 +1,5 @@
 const express = require("express"),
+  moment = require("moment"),
   router = express.Router();
 
 const db = require('../db/db');
@@ -22,6 +23,7 @@ router.get('/', (req, res) => {
       if (err) throw err;
       res.render('stories', {
         results: results,
+        moment: moment,
         page: 'stories'
       });
     });
