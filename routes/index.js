@@ -43,7 +43,11 @@ router.post("/register", (req, res) => {
       const sql2 = "SELECT id, username FROM users WHERE id = ?";
       db.query(sql2, [results.insertId], (err, user) => {
         if (err) throw err;
-        req.login(user, err => {
+        const registeredUser = {
+          user_id: user[0].id,
+          username: user[0].username
+        };
+        req.login(registeredUser, err => {
           res.redirect("/stories");
         }); // passport login function
       });
