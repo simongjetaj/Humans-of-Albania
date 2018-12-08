@@ -1,42 +1,50 @@
-<% include ./partials/header %>
-<% include ./partials/navbar %>
+<% include ./partials/header %> <% include ./partials/navbar %>
 
-
-  <div class="columns mt is-mobile is-centered">
-    <div class="column is-4-widescreen is-5-fullhd  is-4-desktop is-4-tablet is-8-mobile">
-      <form action="/login" method="POST" id="loginForm">
-        <div class="field">
-          <label for="lUsername" class="label">Username</label>
-          <div class="control has-icons-left has-icons-right">
-            <input class="input" type="text" placeholder="Enter Username" name="username" id="lUsername">
-            <span class="icon is-small is-left">
-              <i class="fas fa-user"></i>
-            </span>
-          </div>
+<div class="columns mt is-mobile is-centered">
+  <div
+    class="column is-4-widescreen is-5-fullhd  is-4-desktop is-4-tablet is-8-mobile"
+  >
+    <form action="/login" method="POST" id="loginForm">
+      <div class="field">
+        <label for="lUsername" class="label">Username</label>
+        <div class="control has-icons-left has-icons-right">
+          <input
+            class="input"
+            type="text"
+            placeholder="Enter Username"
+            name="username"
+            id="lUsername"
+          />
+          <span class="icon is-small is-left">
+            <i class="fas fa-user"></i>
+          </span>
         </div>
+      </div>
 
-        <div class="field">
-          <label for="lPassword" class="label">Password</label>
-          <div class="control has-icons-left has-icons-right">
-            <input class="input" type="password" placeholder="Enter Password" name="password" id="lPassword">
-            <span class="icon is-small is-left">
-              <i class="fas fa-lock"></i>
-            </span>
-          </div>
+      <div class="field">
+        <label for="lPassword" class="label">Password</label>
+        <div class="control has-icons-left has-icons-right">
+          <input
+            class="input"
+            type="password"
+            placeholder="Enter Password"
+            name="password"
+            id="lPassword"
+          />
+          <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
         </div>
+      </div>
 
-
-        <div class="field is-grouped is-pulled-right">
-          <div class="control">
-            <a href="/stories" class="button is-outlined">Cancel</a>
-          </div>
-          <div class="control">
-            <button class="button primary">Login</button>
-          </div>
+      <div class="field is-grouped is-pulled-right">
+        <div class="control">
+          <a href="/stories" class="button is-outlined">Cancel</a>
         </div>
-      </form>
-    </div>
+        <div class="control"><button class="button primary">Login</button></div>
+      </div>
+    </form>
   </div>
-
+</div>
 
 <% include ./partials/footer %>
