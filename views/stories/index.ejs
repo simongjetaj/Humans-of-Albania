@@ -4,22 +4,13 @@
   <div class="hero-body">
     <div class="container">
       <h1 class="title">It's Your Turn!</h1>
-      <% if(currentUser) { %>
       <button
         class="modalBtn button primary is-rounded"
         data-modal="newStoryModal"
+        data-notloggedin="<%= !currentUser ? 'true' : 'false' %>"
       >
         Tell Us Your Story
       </button>
-      <% } else { %>
-      <button
-        class="modalBtn button primary is-rounded"
-        data-modal="newStoryModal"
-        data-notloggedin="true"
-      >
-        Tell Us Your Story
-      </button>
-      <% } %>
     </div>
   </div>
 </section>
@@ -63,9 +54,12 @@
               <%= moment(result.stories.created_at).format('LLL'); %></time
             >
           </div>
+          <% if (currentUser) { %>
           <a href="stories/<%= result.stories.id %>" class="button is-dark"
             >Read More</a
           >
+          <% } else { %>
+          <a href="login" class="button is-dark">Read More</a> <% } %>
         </div>
       </div>
     </div>
