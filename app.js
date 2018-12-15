@@ -6,7 +6,8 @@ const express = require("express"),
   MySQLStore = require("express-mysql-session")(session), // we use it because nodemon get rids of our user session everytime it starts, so we save their session and store them into a table
   LocalStrategy = require("passport-local").Strategy,
   bcrypt = require("bcrypt"),
-  path = require("path");
+  path = require("path"),
+  flash = require("connect-flash");
 
 const db = require("./db/db"),
   indexRoutes = require("./routes/index"),
@@ -23,6 +24,7 @@ app.use(
   })
 );
 app.use(bodyParser.json());
+app.use(flash());
 
 const options = {
   host: process.env.DB_HOST,
@@ -47,6 +49,7 @@ app.use(passport.session());
 
 app.use(function(req, res, next) {
   res.locals.currentUser = req.user; // now currentUser is availavable for use in all of our view files via the variable named currentUser
+  res.locals.error = req.flash("error");
   next();
 });
 
@@ -58,7 +61,9 @@ passport.use(
       (err, user) => {
         if (err) done(err);
         if (user.length === 0) {
-          done(null, false);
+          done(null, false, {
+            message: "The username or password you entered is incorrect!"
+          });
         } else {
           const hash = user[0].password.toString();
 
@@ -69,7 +74,9 @@ passport.use(
                 username: user[0].username
               }); // username and password should match the names of the form input fields and they should be named username & password
             } else {
-              return done(null, false);
+              return done(null, false, {
+                message: "The username or password you entered is incorrect!"
+              });
             }
           });
         }

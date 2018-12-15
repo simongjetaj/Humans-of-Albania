@@ -4,6 +4,9 @@
   <div
     class="column is-4-widescreen is-5-fullhd  is-4-desktop is-4-tablet is-8-mobile"
   >
+    <% if(error && error.length > 0) { %>
+    <div class="box has-text-danger has-text-centered"><%= error %></div>
+    <% } %>
     <form action="/login" method="POST" id="loginForm">
       <div class="field">
         <label for="lUsername" class="label">Username</label>

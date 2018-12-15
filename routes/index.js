@@ -14,13 +14,15 @@ router.post(
   "/login",
   passport.authenticate("local", {
     successRedirect: "/stories",
-    failureRedirect: "/login"
+    failureRedirect: "/login",
+    failureFlash: true
   })
 );
 
 router.get("/login", (req, res) => {
   res.render("login", {
-    page: "login"
+    page: "login",
+    message: req.flash("error")
   });
 });
 
