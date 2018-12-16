@@ -4,6 +4,11 @@
   <div
     class="column is-4-widescreen is-5-fullhd  is-4-desktop is-4-tablet is-8-mobile"
   >
+    <% if(error && error.length > 0) { %>
+    <div class="box has-text-danger has-text-centered">
+      <i class="fas fa-exclamation-circle"></i> <%= error %>
+    </div>
+    <% }%>
     <form action="/register" method="POST" id="registerForm">
       <div class="field">
         <label for="rUsername" class="label">Username</label>

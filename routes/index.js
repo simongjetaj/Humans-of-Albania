@@ -2,7 +2,8 @@ const express = require("express"),
   router = express.Router(),
   bcrypt = require("bcrypt"),
   saltRounds = 10,
-  passport = require("passport");
+  passport = require("passport"),
+  validator = require("validator");
 
 const db = require("../db/db");
 
@@ -33,18 +34,37 @@ router.get("/register", (req, res) => {
 });
 
 router.post("/register", (req, res) => {
-  const username = req.body.rUsername,
-    email = req.body.rEmail,
-    password = req.body.rPassword;
+  const username = validator.escape(req.body.rUsername.trim()),
+    email = validator.escape(req.body.rEmail.trim()),
+    password = validator.escape(req.body.rPassword.trim()),
+    confirmPassword = validator.escape(req.body.rConfirmPassword.trim());
+
+  if (!username || !email || !password || !confirmPassword) {
+    req.flash("error", "Please, fill in all fields!");
+    return res.redirect("back");
+  } else if (!validator.isEmail(email)) {
+    req.flash("error", "Please, enter a valid email!");
+    return res.redirect("back");
+  }
+  if (!validator.equals(password, confirmPassword)) {
+    req.flash("error", "Password does not match the confirm password!");
+    return res.redirect("back");
+  }
 
   const sql = "INSERT INTO users (username, email, password) VALUES(?, ?, ?)";
 
   bcrypt.hash(password, saltRounds, function(err, hashPassword) {
     db.query(sql, [username, email, hashPassword], (err, results, fields) => {
-      if (err) throw err;
+      if (err) {
+        req.flash("error", err.message);
+        return res.redirect("back");
+      }
       const sql2 = "SELECT id, username FROM users WHERE id = ?";
       db.query(sql2, [results.insertId], (err, user) => {
-        if (err) throw err;
+        if (err) {
+          req.flash("error", err.message);
+          return res.redirect("back");
+        }
         const registeredUser = {
           user_id: user[0].id,
           username: user[0].username

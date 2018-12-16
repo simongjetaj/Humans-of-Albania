@@ -55,7 +55,6 @@ function handleCreateStory(e) {
     return;
   }
   const formData = $(this).serialize();
-  console.log(formData);
   $.post("/stories", formData, function(data) {
     const output = `
       <div class="column is-one-quarter-desktop is-one-third-tablet">

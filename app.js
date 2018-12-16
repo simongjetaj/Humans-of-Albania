@@ -47,14 +47,14 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   res.locals.currentUser = req.user; // now currentUser is availavable for use in all of our view files via the variable named currentUser
   res.locals.error = req.flash("error");
   next();
 });
 
 passport.use(
-  new LocalStrategy(function(username, password, done) {
+  new LocalStrategy((username, password, done) => {
     db.query(
       "SELECT id, username, email, password FROM users WHERE username = ?",
       [username],
@@ -67,7 +67,7 @@ passport.use(
         } else {
           const hash = user[0].password.toString();
 
-          bcrypt.compare(password, hash, function(err, res) {
+          bcrypt.compare(password, hash, (err, res) => {
             if (res === true) {
               return done(null, {
                 user_id: user[0].id,
