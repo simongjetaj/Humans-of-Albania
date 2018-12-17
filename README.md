@@ -13,3 +13,5 @@ Assuming, You have node and npm properly installed on your machine, you need to:
 * It is recommended against committing your .env file to version control. (I have commited it, just to make easier for everyone who wants to run the project.)
 *process.env* now has the keys and values I have defined in my *.env* file. (Feel free to change them in case you have different configurations on phpMyAdmin.)
 
+[![hony.png](https://i.postimg.cc/Jn7VDcCP/hony.png)](https://postimg.cc/064HhSQw)
+[![hony2.png](https://i.postimg.cc/SsQRSMTp/hony2.png)](https://postimg.cc/QBPhSHZ6)
