@@ -14,4 +14,4 @@ Assuming, You have node and npm properly installed on your machine, you need to:
 *process.env* now has the keys and values I have defined in my *.env* file. (Feel free to change them in case you have different configurations on phpMyAdmin.)
 
 [![hony.png](https://i.postimg.cc/Jn7VDcCP/hony.png)](https://i.postimg.cc/Jn7VDcCP/hony.png)
-[![hony2.png](https://i.postimg.cc/SsQRSMTp/hony2.png)](https://i.postimg.cc/SsQRSMTp/hony2.png)
+[![hony2.png](https://i.postimg.cc/C5Bq085x/hony2.png)](https://i.postimg.cc/C5Bq085x/hony2.png)
