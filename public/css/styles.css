@@ -54,7 +54,28 @@ body {
 .header-content h1 {
   font-size: 2.8rem;
   margin-bottom: 0;
-  text-shadow: 1px 1px 1px #000;
+  /* text-shadow: 1px 1px 1px #000; */
+}
+
+.header-content .animated {
+  background: url('../text-bg.png') no-repeat;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: rgba(255, 255, 255, .55);
+  /* color: transparent; */
+  animation: moveBg 90s linear infinite;
+  -webkit-animation: moveBg 90s linear infinite;
+}
+
+/* Text Background Animation */
+@keyframes moveBg {
+  from {
+    background-position: 0% 30%;
+  }
+
+  to {
+    background-position: 100% 50%;
+  }
 }
 
 .header-content p {
@@ -112,7 +133,7 @@ body {
   margin: 0;
 }
 
-.modal-body > form .row {
+.modal-body>form .row {
   padding: 1rem 1.4rem;
   text-align: center;
 }
@@ -182,6 +203,7 @@ input.input:focus {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -245,52 +267,57 @@ a.primary {
   text-decoration: none;
   margin-top: 1rem;
   border-radius: 0.25rem;
-  -webkit-clip-path: polygon(
-    40% 0%,
+  -webkit-clip-path: polygon(40% 0%,
     40% 20%,
     100% 20%,
     100% 80%,
     40% 80%,
     40% 100%,
-    0% 50%
-  );
-  clip-path: polygon(
-    40% 0%,
+    0% 50%);
+  clip-path: polygon(40% 0%,
     40% 20%,
     100% 20%,
     100% 80%,
     40% 80%,
     40% 100%,
-    0% 50%
-  );
+    0% 50%);
 }
+
 nav strong.navbar-item {
   color: #424242;
 }
+
 nav a.navbar-item {
   color: #fff;
 }
+
 button.primary:hover,
 button.primary:focus {
   color: #fff;
 }
+
 .micro {
   float: right;
   cursor: pointer;
 }
+
 .micro:hover {
   color: #000;
 }
+
 .mb {
   margin-bottom: 4rem;
 }
+
 #editCommentForm {
   display: none;
 }
+
 #search:focus {
   border: none;
   box-shadow: inset 1px 1px 5px #000;
 }
+
 .back {
   margin-top: 1rem;
   float: left;
@@ -298,9 +325,11 @@ button.primary:focus {
   font-size: 1.2rem;
   text-indent: -5rem;
 }
+
 .back:hover {
   color: var(--btnPrimary);
 }
+
 .notification {
   margin: 4rem 0 -3rem 0;
 }
@@ -308,6 +337,7 @@ button.primary:focus {
 .center {
   text-align: center;
 }
+
 footer {
   padding: 1.5em;
 }
@@ -317,21 +347,26 @@ footer {
   width: 100%;
   bottom: 0;
 }
+
 .footer-link {
   color: #363636;
 }
+
 .media-content {
   overflow: hidden;
 }
+
 .footer-link:hover {
   box-shadow: inset 0 0.6px 0 var(--btnPrimary),
     inset 0 -0.6px 0 var(--btnPrimary);
 }
+
 @media (max-width: 960px) {
   .container {
     padding: 0 3rem 0 3rem;
   }
 }
+
 @media (max-width: 500px) {
   html {
     font-size: 0.8rem;
