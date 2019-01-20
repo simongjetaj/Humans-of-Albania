@@ -1,16 +1,16 @@
 {
   "name": "humans-of-new-york-2",
   "version": "1.0.0",
-  "description": "",
+  "description": "A yelp-like application from scratch using Bulma, Node, Express, MySQL, jQuery and Ajax.",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
-  "author": "Simon S. Gjetaj",
+  "author": "Simon S. Gjetaj <gjetajsimon@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^3.0.2",
-    "body-parser": "^1.18.2",
     "connect-flash": "^0.1.1",
     "dotenv": "^6.2.0",
     "ejs": "^2.5.9",
@@ -21,6 +21,7 @@
     "mysql": "^2.16.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
+    "randomstring": "^1.1.5",
     "validator": "^10.9.0"
   },
   "devDependencies": {

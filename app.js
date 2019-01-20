@@ -1,29 +1,24 @@
+require("dotenv").config();
 const express = require("express"),
   app = express(),
-  bodyParser = require("body-parser"),
   session = require("express-session"),
   passport = require("passport"),
   MySQLStore = require("express-mysql-session")(session), // we use it because nodemon get rids of our user session everytime it starts, so we save their session and store them into a table
-  LocalStrategy = require("passport-local").Strategy,
-  bcrypt = require("bcrypt"),
   path = require("path"),
-  flash = require("connect-flash");
+  flash = require("connect-flash"),
+  randomString = require("randomstring");
 
-const db = require("./db/db"),
-  indexRoutes = require("./routes/index"),
+const indexRoutes = require("./routes/index"),
   storiesRoutes = require("./routes/stories"),
   commentRoutes = require("./routes/comments");
 
-require("dotenv").config();
+const port = parseInt(process.env.PORT, 10) || 3000;
+
+require("./config/passport")(passport);
 
 app.set("view engine", "ejs");
 app.use("/public", express.static(path.join(__dirname, "public")));
-app.use(
-  bodyParser.urlencoded({
-    extended: false
-  })
-);
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: false })); // bodyParser
 app.use(flash());
 
 const options = {
@@ -37,7 +32,7 @@ const sessionStore = new MySQLStore(options);
 
 app.use(
   session({
-    secret: process.env.SECRET,
+    secret: randomString.generate(),
     store: sessionStore,
     resave: false,
     saveUninitialized: false
@@ -49,41 +44,10 @@ app.use(passport.session());
 
 app.use((req, res, next) => {
   res.locals.currentUser = req.user; // now currentUser is availavable for use in all of our view files via the variable named currentUser
-  res.locals.error = req.flash("error");
+  res.locals.error = req.flash("error"); // passport error msgs
+  res.locals.errorMsg = req.flash("errorMsg");
   next();
 });
-
-passport.use(
-  new LocalStrategy((username, password, done) => {
-    db.query(
-      "SELECT id, username, email, password FROM users WHERE username = ?",
-      [username],
-      (err, user) => {
-        if (err) done(err);
-        if (user.length === 0) {
-          done(null, false, {
-            message: "The username or password you entered is incorrect!"
-          });
-        } else {
-          const hash = user[0].password.toString();
-
-          bcrypt.compare(password, hash, (err, res) => {
-            if (res === true) {
-              return done(null, {
-                user_id: user[0].id,
-                username: user[0].username
-              }); // username and password should match the names of the form input fields and they should be named username & password
-            } else {
-              return done(null, false, {
-                message: "The username or password you entered is incorrect!"
-              });
-            }
-          });
-        }
-      }
-    );
-  })
-);
 
 // Requiring routes
 app.use(indexRoutes);
@@ -93,8 +57,6 @@ app.use("/stories/:id/comments", commentRoutes);
 app.get("*", (req, res) => {
   res.render("404");
 });
-
-const port = process.env.PORT || 3000;
 
 app.listen(port, () =>
   console.log(`Simon's Server started on port ${port}...`)

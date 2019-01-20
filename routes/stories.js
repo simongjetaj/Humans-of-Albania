@@ -4,8 +4,10 @@ const express = require("express"),
 
 const db = require("../db/db");
 
+const { isLoggedIn } = require("../config/auth");
+
 router.get("/", (req, res) => {
-  // console.log(req.user, req.isAuthenticated()); // returns users id and username {user_id: 45, username: 'x'} or undefined and true or false
+  // console.info(req.user, req.isAuthenticated()); // returns users id and username {user_id: 45, username: 'x'} or undefined and true or false
 
   if (req.query.search) {
     const sql =
@@ -40,7 +42,7 @@ router.get("/", (req, res) => {
   }
 });
 
-router.post("/", (req, res) => {
+router.post("/", isLoggedIn, (req, res) => {
   const formData = {
     user_id: parseInt(req.body.user_id),
     title: req.body.title,
@@ -61,7 +63,7 @@ router.post("/", (req, res) => {
   });
 });
 
-router.get("/:id", (req, res) => {
+router.get("/:id", isLoggedIn, (req, res) => {
   const sql = `SELECT s.id AS storyId, s.title, s.story, u.id AS userId, u.username, s.created_at FROM stories AS s INNER JOIN users AS u ON s.user_id = u.id WHERE s.id = ?`;
   db.query(sql, [req.params.id], (err, foundedStory) => {
     if (err || foundedStory.length === 0) res.redirect("/stories");
@@ -112,10 +114,5 @@ router.delete("/:id", isLoggedIn, (req, res) => {
     res.json(foundedStory);
   });
 });
-
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) return next();
-  res.redirect("/login");
-}
 
 module.exports = router;

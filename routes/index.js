@@ -53,7 +53,7 @@ router.post("/register", (req, res) => {
 
   const sql = "INSERT INTO users (username, email, password) VALUES(?, ?, ?)";
 
-  bcrypt.hash(password, saltRounds, function(err, hashPassword) {
+  bcrypt.hash(password, saltRounds, (err, hashPassword) => {
     db.query(sql, [username, email, hashPassword], (err, results, fields) => {
       if (err) {
         req.flash("error", err.message);
@@ -86,17 +86,12 @@ router.get("/logout", (req, res) => {
   });
 });
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser((user, done) => {
   done(null, user);
 });
 
-passport.deserializeUser(function(user, done) {
+passport.deserializeUser((user, done) => {
   done(null, user);
 });
-
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) return next();
-  res.redirect("/login");
-}
 
 module.exports = router;

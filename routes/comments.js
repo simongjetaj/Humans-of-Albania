@@ -3,7 +3,9 @@ const express = require("express"),
 
 const db = require("../db/db");
 
-router.post("/", (req, res) => {
+const { isLoggedIn } = require("../config/auth");
+
+router.post("/", isLoggedIn, (req, res) => {
   const commentData = {
     post_id: req.body.post_id,
     username: req.body.username,
@@ -24,7 +26,7 @@ router.post("/", (req, res) => {
   });
 });
 
-router.put("/:comment_id", (req, res) => {
+router.put("/:comment_id", isLoggedIn, (req, res) => {
   const comment = {
     comment: req.body.editedComment
   };
@@ -41,7 +43,7 @@ router.put("/:comment_id", (req, res) => {
   });
 });
 
-router.delete("/:comment_id", (req, res) => {
+router.delete("/:comment_id", isLoggedIn, (req, res) => {
   const sql = "DELETE FROM comments WHERE id = ?";
   db.query(sql, [req.params.comment_id], (err, results, fields) => {
     if (err) throw err;
