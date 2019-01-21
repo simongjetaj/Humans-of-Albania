@@ -1,5 +1,5 @@
 # Humans Of New York II
-**A yelp-like application from scratch using Bulma, Node, Express, MySQL, jQuery and Ajax.**
+**A blog application from scratch using Node.js, Express, MySQL, Bulma, jQuery and Ajax.**
 
 Assuming, You have *Node*, *npm* and *Xampp* properly installed on your machine, you need to:
 
