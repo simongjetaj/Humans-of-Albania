@@ -1,7 +1,7 @@
 {
   "name": "humans-of-new-york-2",
   "version": "1.0.0",
-  "description": "A yelp-like application from scratch using Bulma, Node, Express, MySQL, jQuery and Ajax.",
+  "description": "A blog application from scratch using Node.js, Express, MySQL, Bulma, jQuery and Ajax.",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
