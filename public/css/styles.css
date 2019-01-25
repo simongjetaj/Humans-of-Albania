@@ -215,6 +215,7 @@ input.input:focus {
   cursor: pointer;
   float: right;
   line-height: 1;
+  margin-top: -0.28rem;
 }
 
 .closeBtn:hover,

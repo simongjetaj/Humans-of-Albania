@@ -1,21 +1,14 @@
-<% include ./partials/header %> <% include ./partials/navbar %>
+<% include ./partials/header %>
+<% include ./partials/navbar %>
 
 <div class="columns mt is-mobile is-centered">
-  <div
-    class="column is-4-widescreen is-5-fullhd  is-4-desktop is-4-tablet is-8-mobile"
-  >
+  <div class="column is-4-widescreen is-5-fullhd  is-4-desktop is-4-tablet is-8-mobile">
     <% include ./partials/messages %>
     <form action="/register" method="POST" id="registerForm">
       <div class="field">
         <label for="rUsername" class="label">Username</label>
         <div class="control has-icons-left has-icons-right">
-          <input
-            class="input"
-            type="text"
-            placeholder="Enter Username"
-            name="rUsername"
-            id="rUsername"
-          />
+          <input class="input" type="text" placeholder="Enter Username" name="rUsername" id="rUsername" />
           <span class="icon is-small is-left">
             <i class="fas fa-user"></i>
           </span>
@@ -25,13 +18,7 @@
       <div class="field">
         <label for="rEmail" class="label">Email</label>
         <div class="control has-icons-left has-icons-right">
-          <input
-            class="input"
-            type="email"
-            placeholder="Enter Email"
-            name="rEmail"
-            id="rEmail"
-          />
+          <input class="input" type="email" placeholder="Enter Email" name="rEmail" id="rEmail" />
           <span class="icon is-small is-left">
             <i class="fas fa-envelope"></i>
           </span>
@@ -41,13 +28,7 @@
       <div class="field">
         <label for="rPassword" class="label">Password</label>
         <div class="control has-icons-left has-icons-right">
-          <input
-            class="input"
-            type="password"
-            placeholder="Enter Password"
-            name="rPassword"
-            id="rPassword"
-          />
+          <input class="input" type="password" placeholder="Enter Password" name="rPassword" id="rPassword" />
           <span class="icon is-small is-left">
             <i class="fas fa-lock"></i>
           </span>
@@ -57,13 +38,7 @@
       <div class="field">
         <label for="rConfirmPassword" class="label">Confirm Password</label>
         <div class="control has-icons-left has-icons-right">
-          <input
-            class="input"
-            type="password"
-            placeholder="Confirm Password"
-            name="rConfirmPassword"
-            id="rConfirmPassword"
-          />
+          <input class="input" type="password" placeholder="Confirm Password" name="rConfirmPassword" id="rConfirmPassword" />
           <span class="icon is-small is-left">
             <i class="fas fa-lock"></i>
           </span>

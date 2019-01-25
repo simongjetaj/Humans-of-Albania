@@ -17,13 +17,7 @@
       <div class="navbar-item">
         <div class="field has-addons">
           <div class="control has-icons-left">
-            <input
-              class="input"
-              type="search"
-              name="search"
-              id="search"
-              placeholder="Search Story..."
-            />
+            <input class="input" type="search" name="search" id="search" placeholder="Search Story..." />
             <span class="icon is-small is-left">
               <i class="fas fa-search"></i>
             </span>
@@ -36,11 +30,12 @@
         <div class="field is-grouped">
           <% if(!currentUser) { %>
           <a class="navbar-item" href="/login">Login</a>
-          <a class="navbar-item" href="/register">Register</a> <% } else { %>
-          <span class="navbar-item has-text-white"
-            >Hello, <%= currentUser.username %>!</span
-          >
-          <a class="navbar-item" href="/logout">Logout</a> <% } %>
+          <a class="navbar-item" href="/register">Register</a>
+          <% } else { %>
+          <span class="navbar-item has-text-white">Hello,
+            <%= currentUser.username %>!</span>
+          <a class="navbar-item" href="/logout">Logout</a>
+          <% } %>
         </div>
       </div>
     </div>

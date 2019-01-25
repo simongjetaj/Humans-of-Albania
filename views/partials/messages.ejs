@@ -1,9 +1,12 @@
 <% if(error && error.length > 0) { %>
 <div class="box has-text-danger has-text-centered">
-  <i class="fas fa-exclamation-circle"></i> <%= error %>
+  <i class="fas fa-exclamation-circle"></i>
+  <%= error %>
 </div>
-<% } %> <% if(errorMsg != '') { %>
+<% } %>
+<% if(errorMsg != '') { %>
 <div class="box has-text-danger has-text-centered">
-  <i class="fas fa-exclamation-circle"></i> <%= errorMsg %>
+  <i class="fas fa-exclamation-circle"></i>
+  <%= errorMsg %>
 </div>
 <% } %>

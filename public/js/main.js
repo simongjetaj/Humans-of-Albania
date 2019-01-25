@@ -55,7 +55,7 @@ function handleCreateStory(e) {
     return;
   }
   const formData = $(this).serialize();
-  $.post("/stories", formData, function(data) {
+  $.post("/stories", formData, function (data) {
     const output = `
       <div class="column is-one-quarter-desktop is-one-third-tablet">
       <div class="card">
@@ -109,13 +109,13 @@ function handleUpdateStory(e) {
     url: actionUrl,
     data: formData,
     type: "PUT",
-    success: function(data) {
+    success: function (data) {
       $(".title").html(data[0].title);
       $(".story").html(data[0].story);
       document.querySelector(".modal").style.display = "none";
       showNotification("Story has been updated successfully!", "is-success");
     },
-    error: function(xhr, status, error) {
+    error: function (xhr, status, error) {
       document.querySelector(".modal").style.display = "none";
       showNotification(error, "is-danger");
     }
@@ -133,7 +133,7 @@ function handleDeleteStory(e) {
     $.ajax({
       url: actionUrl,
       type: "DELETE",
-      success: function(data) {
+      success: function (data) {
         window.location.href = "/stories";
         setTimeout(
           showNotification(
@@ -143,7 +143,7 @@ function handleDeleteStory(e) {
           600
         );
       },
-      error: function(xhr, status, error) {
+      error: function (xhr, status, error) {
         showNotification(error, "is-danger");
       }
     });
@@ -155,10 +155,10 @@ $("#search").on("input", searchStories);
 
 function searchStories(e) {
   const url = `/stories?search=${encodeURIComponent(e.target.value)}`;
-  $.getJSON(url, function(data) {
+  $.getJSON(url, function (data) {
     $(".columns").html("");
 
-    data.forEach(function(story) {
+    data.forEach(function (story) {
       let output = `
       <div class="column is-one-quarter-desktop is-one-third-tablet">
         <div class="card">
@@ -198,7 +198,7 @@ function searchStories(e) {
   });
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   // Get all "navbar-burger" elements
   var $navbarBurgers = Array.prototype.slice.call(
     document.querySelectorAll(".navbar-burger"),
@@ -208,8 +208,8 @@ document.addEventListener("DOMContentLoaded", function() {
   // Check if there are any navbar burgers
   if ($navbarBurgers.length > 0) {
     // Add a click event on each of them
-    $navbarBurgers.forEach(function($el) {
-      $el.addEventListener("click", function() {
+    $navbarBurgers.forEach(function ($el) {
+      $el.addEventListener("click", function () {
         // Get the target from the "data-target" attribute
         var target = $el.dataset.target;
         var $target = document.getElementById(target);
@@ -226,12 +226,12 @@ const micro = document.querySelector("span.micro");
 const story = document.getElementById("story");
 
 if (micro) {
-  micro.onclick = function() {
+  micro.onclick = function () {
     recognition.start();
   };
 }
 
-recognition.onresult = function(e) {
+recognition.onresult = function (e) {
   var textGenerated = e.results[0][0].transcript;
   story.textContent += textGenerated;
 };
@@ -244,7 +244,7 @@ function handleCommentCreate(e) {
 
   const comment = $(this).serialize();
   const actionUrl = $(this).attr("action");
-  $.post(`${actionUrl}`, comment, function(data) {
+  $.post(`${actionUrl}`, comment, function (data) {
     const output = `
       <article class="media">
       <figure class="media-left">
@@ -300,7 +300,7 @@ function handleCommentCreate(e) {
 }
 
 // HANDLE UPDATE COMMENT FUNCTIONALITY
-$("#comments").on("click", ".editCommentBtn", function() {
+$("#comments").on("click", ".editCommentBtn", function () {
   $(this)
     .parents()
     .eq(2)
@@ -324,11 +324,11 @@ function handleUpdateComment(e) {
     url: actionUrl,
     data: commentData,
     type: "PUT",
-    success: function(data) {
+    success: function (data) {
       $itemToUpdate.html(data[0].comment);
       editCommentForm.fadeToggle(); // close form editing when comment update successfully
     },
-    error: function(xhr, status, error) {
+    error: function (xhr, status, error) {
       showNotification(error, "is-danger");
     }
   });
@@ -348,10 +348,10 @@ function handleDeleteComment(e) {
     $.ajax({
       url: actionUrl,
       type: "DELETE",
-      success: function(data) {
+      success: function (data) {
         $commentToDelete.remove();
       },
-      error: function(xhr, status, error) {
+      error: function (xhr, status, error) {
         showNotification(error, "is-danger");
       }
     });
@@ -376,6 +376,6 @@ function showNotification(message, color) {
   setTimeout(() => removeElement.remove(), 3000);
 }
 
-$("body").on("click", ".deleteNotification", function() {
+$("body").on("click", ".deleteNotification", function () {
   $(".message").remove();
 });

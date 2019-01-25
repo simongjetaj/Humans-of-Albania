@@ -12,22 +12,18 @@ const indexRoutes = require("./routes/index"),
   storiesRoutes = require("./routes/stories"),
   commentRoutes = require("./routes/comments");
 
-const port = parseInt(process.env.PORT, 10) || 3000;
+const PORT = parseInt(process.env.PORT, 10) || 3000;
 
 require("./config/passport")(passport);
 
 app.set("view engine", "ejs");
 app.use("/public", express.static(path.join(__dirname, "public")));
-app.use(express.urlencoded({ extended: false })); // bodyParser
+app.use(express.urlencoded({
+  extended: false
+})); // bodyParser
 app.use(flash());
 
-const options = {
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME
-};
-
+const options = require("./config/db-keys");
 const sessionStore = new MySQLStore(options);
 
 app.use(
@@ -58,6 +54,6 @@ app.get("*", (req, res) => {
   res.render("404");
 });
 
-app.listen(port, () =>
-  console.log(`Simon's Server started on port ${port}...`)
+app.listen(PORT, () =>
+  console.log(`Simon's Server started on port ${PORT}...`)
 );

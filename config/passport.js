@@ -3,7 +3,7 @@ const LocalStrategy = require("passport-local").Strategy,
 
 const db = require("../db/db");
 
-module.exports = function(passport) {
+module.exports = function (passport) {
   passport.use(
     new LocalStrategy((username, password, done) => {
       db.query(
