@@ -1,4 +1,4 @@
-# Humans Of New York II
+# Humans Of Albania
 **A blog application from scratch using Node.js, Express, MySQL, Bulma, jQuery and Ajax.**
 
 Assuming, You have *Node*, *npm* and *Xampp* properly installed on your machine, you need to:
