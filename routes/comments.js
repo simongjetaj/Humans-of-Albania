@@ -3,7 +3,9 @@ const express = require("express"),
 
 const db = require("../db/db");
 
-const { isLoggedIn } = require("../config/auth");
+const {
+  isLoggedIn
+} = require("../config/auth");
 
 router.post("/", isLoggedIn, (req, res) => {
   const commentData = {

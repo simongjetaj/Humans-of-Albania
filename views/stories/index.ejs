@@ -66,20 +66,42 @@
     </div>
 
     <div class="modal-body">
-      <form action="/stories" method="POST" id="newStoryForm">
+      <form action="/stories" method="POST" id="newStoryForm" enctype="multipart/form-data">
         <div class="row">
-          <label for="title">Title</label>
+          <label for="title"><strong>Title <span class="has-text-danger">&ast;</span></strong></label>
           <input type="text" id="title" name="title" />
         </div>
 
         <div class="row">
-          <label for="story">Story <span class="micro"><i class="fas fa-microphone"></i></span></label>
-          <textarea id="story" rows="8" name="story"></textarea>
+          <label for="story"><strong>Story <span class="has-text-danger">&ast;</span></strong><span class="micro"><i
+                class="fas fa-microphone"></i></span></label>
+          <textarea id="story" rows="7" name="story"></textarea>
         </div>
 
+        <!-- <div class="row">
+          <label for="image"><strong>Image</strong></label>
+          <div class="file has-name">
+            <label class="file-label">
+              <input class="file-input" type="file" name="image" id="image">
+              <span class="file-cta customImage">
+                <span class="file-icon">
+                  <i class="fas fa-upload"></i>
+                </span>
+                <span class="file-label">
+                  Choose an image...
+                </span>
+              </span>
+            </label>
+          </div>
+        </div> -->
+
         <div class="modal-footer">
-          <button type="button" class="cancel">Cancel</button>
-          <button type="submit" class="create">Create</button>
+          <button type="button" class="cancel">
+            <i class="fas fa-times"></i> Cancel
+          </button>
+          <button type="submit" class="create">
+            <i class="fas fa-plus"></i> Create
+          </button>
           <%
           if(currentUser) { %>
           <input type="hidden" name="user_id" value="<%= currentUser.user_id %>" />
@@ -91,3 +113,4 @@
 </div>
 
 <% include ../partials/footer %>
+

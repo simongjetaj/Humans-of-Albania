@@ -1,10 +1,36 @@
 const express = require("express"),
   moment = require("moment"),
+  multer = require("multer"),
+  cloudinary = require("cloudinary"),
+  cloudinaryStorage = require("multer-storage-cloudinary"),
   router = express.Router();
 
 const db = require("../db/db");
 
-const { isLoggedIn } = require("../config/auth");
+const {
+  isLoggedIn
+} = require("../config/auth");
+
+// cloudinary.config({
+//   cloud_name: process.env.CLOUD_NAME,
+//   api_key: process.env.API_KEY,
+//   api_secret: process.env.API_SECRET
+// });
+
+// const storage = cloudinaryStorage({
+//   cloudinary: cloudinary,
+//   folder: "storyImages",
+//   allowedFormats: ["jpg", "png"],
+//   transformation: [{
+//     width: 500,
+//     height: 500,
+//     crop: "limit"
+//   }]
+// });
+
+// const parser = multer({
+//   storage
+// });
 
 router.get("/", (req, res) => {
   // console.info(req.user, req.isAuthenticated()); // returns users id and username {user_id: 45, username: 'x'} or undefined and true or false
@@ -26,8 +52,7 @@ router.get("/", (req, res) => {
     );
   } else {
     const options = {
-      sql:
-        "SELECT stories.id, stories.title, stories.story, users.username, stories.created_at FROM stories INNER JOIN users ON stories.user_id = users.id",
+      sql: "SELECT stories.id, stories.title, stories.story, users.username, stories.created_at FROM stories INNER JOIN users ON stories.user_id = users.id",
       nestTables: true
     };
     db.query(options, (err, results, fields) => {
@@ -43,6 +68,7 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", isLoggedIn, (req, res) => {
+  console.log(req.file);
   const formData = {
     user_id: parseInt(req.body.user_id),
     title: req.body.title,
