@@ -14,5 +14,5 @@ Assuming, You have *Node*, *npm* and *Xampp* properly installed on your machine,
 * It is recommended against committing your .env file to version control. (I have commited it, just to make easier for everyone who wants to run the project.)
 *process.env* now has the keys and values I have defined in my *.env* file. (Feel free to change them in case you have different configurations on phpMyAdmin.)
 
-[![hony.png](https://i.postimg.cc/qRw1kK36/hony.png)](https://i.postimg.cc/qRw1kK36/hony.png)
-[![hony2.png](https://i.postimg.cc/C5Bq085x/hony2.png)](https://i.postimg.cc/C5Bq085x/hony2.png)
+[![Humans-of-Albania.png](https://i.postimg.cc/6pfzJt79/Humans-of-Albania.png)](https://postimg.cc/bZd11XHM)
+[![Humans-of-Albania2.png](https://i.postimg.cc/PqBCS8tN/Humans-of-Albania2.png)](https://postimg.cc/p9JVTr5t)
