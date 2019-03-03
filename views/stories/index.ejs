@@ -19,7 +19,8 @@
       <div class="card">
         <div class="card-image">
           <figure class="image is-4by3">
-            <img src="https://bulma.io/images/placeholders/1280x960.png" alt="" />
+            <img src="<%= result.stories.image ? result.stories.image : 'https://bulma.io/images/placeholders/1280x960.png' %>"
+              alt="Story Image" />
           </figure>
         </div>
         <div class="card-content">
@@ -47,9 +48,15 @@
               <%= moment(result.stories.created_at).format('LLL'); %></time>
           </div>
           <% if (currentUser) { %>
-          <a href="stories/<%= result.stories.id %>" class="button is-dark">Read More</a>
+          <a href="stories/<%= result.stories.id %>" class="button is-dark">
+            <span class="icon"><i class="fas fa-eye"></i></span>
+            <span>Read More</span>
+          </a>
           <% } else { %>
-          <a href="login" class="button is-dark">Read More</a>
+          <a href="login" class="button is-dark">
+            <span class="icon"><i class="fas fa-eye"></i></span>
+            <span>Read More</span>
+          </a>
           <% } %>
         </div>
       </div>
@@ -78,11 +85,11 @@
           <textarea id="story" rows="7" name="story"></textarea>
         </div>
 
-        <!-- <div class="row">
+        <div class="row">
           <label for="image"><strong>Image</strong></label>
           <div class="file has-name">
             <label class="file-label">
-              <input class="file-input" type="file" name="image" id="image">
+              <input class="file-input" type="file" name="image" id="image" accept="image/*">
               <span class="file-cta customImage">
                 <span class="file-icon">
                   <i class="fas fa-upload"></i>
@@ -93,7 +100,7 @@
               </span>
             </label>
           </div>
-        </div> -->
+        </div>
 
         <div class="modal-footer">
           <button type="button" class="cancel">
@@ -104,7 +111,7 @@
           </button>
           <%
           if(currentUser) { %>
-          <input type="hidden" name="user_id" value="<%= currentUser.user_id %>" />
+          <input type="hidden" name="user_id" id="user_id" value="<%= currentUser.user_id %>" />
           <% } %>
         </div>
       </form>
@@ -113,4 +120,3 @@
 </div>
 
 <% include ../partials/footer %>
-

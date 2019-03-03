@@ -54,14 +54,30 @@ function handleCreateStory(e) {
     );
     return;
   }
-  const formData = $(this).serialize();
-  $.post("/stories", formData, function (data) {
-    const output = `
+
+  var formData = new FormData();
+  formData.append("image", document.getElementById("image").files[0]);
+  formData.append("title", title);
+  formData.append("story", story);
+  formData.append("user_id", $("#user_id").val());
+  // for (var key of formData.entries()) {
+  //   console.log(key[0] + ', ' + key[1]);
+  // }
+
+  $.ajax({
+    url: "/stories",
+    data: formData,
+    cache: false,
+    contentType: false,
+    processData: false,
+    type: "POST", // For jQuery < 1.9
+    success: function (data) {
+      const output = `
       <div class="column is-one-quarter-desktop is-one-third-tablet">
       <div class="card">
         <div class="card-image">
           <figure class="image is-4by3">
-            <img src="https://bulma.io/images/placeholders/1280x960.png" alt="">
+            <img src="${data[0].image ? data[0].image : 'https://bulma.io/images/placeholders/1280x960.png'}" alt="">
           </figure>
         </div>
         <div class="card-content">
@@ -85,16 +101,23 @@ function handleCreateStory(e) {
           </div>
           <a href="stories/${
             data[0].storyId
-          }" class="button is-dark">Read More</a>
+          }" class="button is-dark"><span class="icon"><i class="fas fa-eye"></i></span>
+          <span>Read More</span></a>
         </div>
       </div>
     </div>
     `;
-    $(".columns").append(output);
-    showNotification("Story has been created successfully!", "is-success");
-    document.querySelector(".modal").style.display = "none";
-    $("#title").val("");
-    $("#story").val("");
+      $(".columns").prepend(output);
+      showNotification("Story has been created successfully!", "is-success");
+      document.querySelector(".modal").style.display = "none";
+      $("#title").val("");
+      $("#story").val("");
+      $("#image").val("");
+    },
+    error: (xhr, status, error) => {
+      document.querySelector(".modal").style.display = "none";
+      showNotification(error, "is-danger");
+    }
   });
 }
 
@@ -130,9 +153,12 @@ function handleDeleteStory(e) {
   const confirmResponse = confirm("Are you sure you want to delete this item?");
   if (confirmResponse) {
     const actionUrl = $(this).attr("action");
+    const formData = $(this).serialize();
+    
     $.ajax({
       url: actionUrl,
       type: "DELETE",
+      data: formData,
       success: function (data) {
         window.location.href = "/stories";
         setTimeout(
@@ -164,7 +190,7 @@ function searchStories(e) {
         <div class="card">
           <div class="card-image">
             <figure class="image is-4by3">
-              <img src="https://bulma.io/images/placeholders/1280x960.png" alt="">
+              <img src="${story.image ? story.image : 'https://bulma.io/images/placeholders/1280x960.png'}" alt="">
             </figure>
           </div>
           <div class="card-content">
@@ -376,6 +402,13 @@ function showNotification(message, color) {
   setTimeout(() => removeElement.remove(), 3000);
 }
 
-$("body").on("click", ".deleteNotification", function () {
+$("body").on("click", ".deleteNotification", () => {
   $(".message").remove();
+});
+
+$(document).ready(() => {
+  $('input[type="file"].file-input').change((e) => {
+    const fileName = e.target.files[0].name;
+    $('label.file-label').append(`<span class="file-name">${fileName}</span>`);
+  });
 });
