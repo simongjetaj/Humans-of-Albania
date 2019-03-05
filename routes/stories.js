@@ -134,22 +134,33 @@ router.get("/:id", isLoggedIn, (req, res) => {
 });
 
 router.put("/:id", isLoggedIn, (req, res) => {
-  const formData = {
-    title: req.body.title,
-    story: req.body.story
-  };
-
-  const sql = "UPDATE stories SET ? WHERE id = ?";
-  db.query(sql, [formData, req.params.id], (err, results, fields) => {
+  upload(req, res, (err) => {
     if (err) {
-      throw err;
-    }
-  });
+      res.statusMessage = err;
+      res.status(409).end();
+    } else {
+      let formData = {
+        user_id: parseInt(req.body.user_id),
+        title: req.body.title,
+        story: req.body.story
+      };
 
-  const sql2 = "SELECT title, story FROM stories WHERE id = ?";
-  db.query(sql2, [req.params.id], (err, editedStory) => {
-    if (err) throw err;
-    res.json(editedStory);
+      if (req.file != undefined) {
+        formData.image = normalize(req.file.path);
+      }
+      const sql = "UPDATE stories SET ? WHERE id = ?";
+      db.query(sql, [formData, req.params.id], (err, results, fields) => {
+        if (err) {
+          throw err;
+        }
+      });
+
+      const sql2 = "SELECT title, story, image FROM stories WHERE id = ?";
+      db.query(sql2, [req.params.id], (err, editedStory) => {
+        if (err) throw err;
+        res.json(editedStory);
+      });
+    }
   });
 });
 

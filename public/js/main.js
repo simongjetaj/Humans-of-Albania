@@ -55,11 +55,7 @@ function handleCreateStory(e) {
     return;
   }
 
-  var formData = new FormData();
-  formData.append("image", document.getElementById("image").files[0]);
-  formData.append("title", title);
-  formData.append("story", story);
-  formData.append("user_id", $("#user_id").val());
+  const formData = new FormData(this);
   // for (var key of formData.entries()) {
   //   console.log(key[0] + ', ' + key[1]);
   // }
@@ -126,15 +122,24 @@ $("#editStoryForm").submit(handleUpdateStory);
 
 function handleUpdateStory(e) {
   e.preventDefault();
-  const formData = $(this).serialize();
+
+  const formData = new FormData(this);
+  for (var key of formData.entries()) {
+    console.log(key[0] + ', ' + key[1]);
+  }
   const actionUrl = $(this).attr("action");
   $.ajax({
     url: actionUrl,
     data: formData,
     type: "PUT",
-    success: function (data) {
+    cache: false,
+    contentType: false,
+    processData: false,
+    success: (data) => {
       $(".title").html(data[0].title);
       $(".story").html(data[0].story);
+      $(".story").html(data[0].story);
+      $("img.img").attr("src", '/' + data[0].image);
       document.querySelector(".modal").style.display = "none";
       showNotification("Story has been updated successfully!", "is-success");
     },
@@ -154,7 +159,7 @@ function handleDeleteStory(e) {
   if (confirmResponse) {
     const actionUrl = $(this).attr("action");
     const formData = $(this).serialize();
-    
+
     $.ajax({
       url: actionUrl,
       type: "DELETE",
@@ -408,6 +413,7 @@ $("body").on("click", ".deleteNotification", () => {
 
 $(document).ready(() => {
   $('input[type="file"].file-input').change((e) => {
+    $('.file-name').remove();
     const fileName = e.target.files[0].name;
     $('label.file-label').append(`<span class="file-name">${fileName}</span>`);
   });

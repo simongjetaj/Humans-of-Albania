@@ -14,7 +14,7 @@
         <div style="width: 450px;">
           <% if(story[0].image) { %>
           <figure class="image">
-            <img src="/<%= story[0].image %>" alt="Story Image">
+            <img src="/<%= story[0].image %>" alt="Story Image" class="img">
           </figure>
           <% } %>
         </div>
@@ -36,12 +36,17 @@
 
     <% if(currentUser && story[0].userId === currentUser.user_id) { %>
     <div class="bottom">
-      <input type="button" class="modalBtn button is-warning" data-modal="editStoryModal" value="Edit">
+      <button type="button" class="modalBtn button is-warning" data-modal="editStoryModal">
+        <span class="icon"><i class="fas fa-edit"></i></span>
+        <span>Edit</span>
+      </button>
       <form action="/stories/<%= story[0].storyId %>" method="POST" id="deleteStoryForm" class="left">
         <% if(story[0].image) { %>
-          <input type="hidden" name="storyImagePath" id="storyImagePath" value="<%= story[0].image %>">
+        <input type="hidden" name="storyImagePath" id="storyImagePath" value="/<%= story[0].image %>">
         <% } %>
-        <button class="button is-danger">Delete</button>
+        <button class="button is-danger">
+          <span class="icon"><i class="fas fa-trash-alt"></i></span>
+          <span>Delete</span></button>
       </form>
     </div>
     <% } %>
@@ -63,8 +68,10 @@
     <div class="media-content">
       <div class="content">
         <span>
-          <strong><small>@
-              <%= comment.username %></small></strong>
+          <strong>
+            <small>@
+              <%= comment.username %></small>
+          </strong>
         </span>
         <p>
           <%= comment.comment %>
@@ -143,16 +150,44 @@
     <div class="modal-body">
       <form action="/stories/<%= story[0].storyId %>" method="POST" id="editStoryForm">
         <div class="row">
-          <label for="title">Title</label>
+          <label for="title"><strong>Title</strong></label>
           <input type="text" id="title" name="title" value="<%= story[0].title %>">
         </div>
         <div class="row">
-          <label for="story">Story</label>
+          <label for="story"><strong>Story</strong></label>
           <textarea id="story" rows="8" name="story"><%= story[0].story %></textarea>
         </div>
+        <div class="row">
+          <label for="image"><strong>Image</strong></label>
+          <div class="file has-name">
+            <label class="file-label">
+              <input class="file-input" type="file" name="image" id="image" accept="image/*">
+              <span class="file-cta customImage">
+                <span class="file-icon">
+                  <i class="fas fa-upload"></i>
+                </span>
+                <span class="file-label">
+                  Choose an image...
+                </span>
+              </span>
+              <% if(story[0].image) { %>
+              <span class="file-name">
+                <%= story[0].image.split('/').pop() %>
+              </span>
+              <% } %>
+            </label>
+          </div>
+        </div>
+
+        <input type="hidden" name="user_id" value="<%= story[0].userId %>">
+
         <div class="modal-footer">
-          <button type="button" class="cancel">Cancel</button>
-          <button type="submit" class="create">Update</button>
+          <button type="button" class="cancel">
+            <i class="fas fa-times"></i> Cancel</a>
+          </button>
+          <button type="submit" class="create">
+            <i class="fas fa-edit"></i> Update</a>
+          </button>
         </div>
       </form>
     </div>
