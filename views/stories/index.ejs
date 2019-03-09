@@ -53,10 +53,13 @@
             <span>Read More</span>
           </a>
           <% } else { %>
-          <a href="login" class="button is-dark">
-            <span class="icon"><i class="fas fa-eye"></i></span>
-            <span>Read More</span>
-          </a>
+          <form method="GET" action="login">
+            <input type="hidden" name="storyId" value="<%= result.stories.id %>">
+            <button type="submit" class="button is-dark">
+              <span class="icon"><i class="fas fa-eye"></i></span>
+              <span>Read More</span>
+            </button>
+          </form>
           <% } %>
         </div>
       </div>

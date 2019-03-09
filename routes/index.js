@@ -11,20 +11,20 @@ router.get("/", (req, res) => {
   res.render("index");
 });
 
-router.post(
-  "/login",
-  passport.authenticate("local", {
-    successRedirect: "stories",
-    failureRedirect: "/login",
-    failureFlash: true
-  })
-);
-
 router.get("/login", (req, res) => {
   res.render("login", {
     page: "login",
+    hiddenStoryId: req.query.storyId,
     message: req.flash("error")
   });
+});
+
+router.post("/login", (req, res) => {
+  passport.authenticate("local", {
+    successRedirect: req.body.hiddenStoryId ? `/stories/${req.body.hiddenStoryId}` : 'stories',
+    failureRedirect: "/login",
+    failureFlash: true
+  })(req, res)
 });
 
 router.get("/register", (req, res) => {

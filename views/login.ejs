@@ -29,12 +29,16 @@
         <div class="control">
           <a href="/stories" class="button is-outlined">
             <span class="icon"><i class="fas fa-times"></i></span>
-            <span>Cancel</span></a>
+            <span>Cancel</span>
+          </a>
         </div>
-        <div class="control"><button class="button primary">
+        <div class="control">
+          <button type="submit" class="button primary">
             <span class="icon"><i class="fas fa-sign-in-alt"></i></span>
-            <span>Login</span></button>
+            <span>Login</span>
+          </button>
         </div>
+        <input type="hidden" name="hiddenStoryId" value="<%= hiddenStoryId %>">
       </div>
     </form>
   </div>

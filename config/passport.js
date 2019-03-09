@@ -3,16 +3,16 @@ const LocalStrategy = require("passport-local").Strategy,
 
 const db = require("../db/db");
 
-module.exports = function (passport) {
+module.exports = (passport) => {
   passport.use(
     new LocalStrategy((username, password, done) => {
       db.query(
         "SELECT id, username, email, password FROM users WHERE username = ?",
         [username],
         (err, user) => {
-          if (err) done(err);
+          if (err) return done(err);
           if (user.length === 0) {
-            done(null, false, {
+            return done(null, false, {
               message: "The username or password you entered is incorrect!"
             });
           } else {
