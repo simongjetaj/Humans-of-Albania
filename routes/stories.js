@@ -165,13 +165,14 @@ router.put("/:id", isLoggedIn, (req, res) => {
 });
 
 router.delete("/:id", isLoggedIn, (req, res) => {
-  fs.unlink(req.body.storyImagePath, (err) => {
-    if (err) {
-      res.statusMessage = err;
-      res.status(500).end();
-    }
-  });
-
+  if (req.body.storyImagePath) {
+    fs.unlink(req.body.storyImagePath, (err) => {
+      if (err) {
+        res.statusMessage = err;
+        res.status(500).end();
+      }
+    });
+  }
   const sql = `DELETE FROM stories WHERE id = ?`;
   db.query(sql, [req.params.id], (err, foundedStory) => {
     if (err) {

@@ -17,7 +17,13 @@ const PORT = parseInt(process.env.PORT, 10) || 3000;
 require("./config/passport")(passport);
 
 app.set("view engine", "ejs");
+
 app.use("/public", express.static(path.join(__dirname, "public")));
+app.use('/bulma', express.static(path.join(__dirname + '/node_modules/bulma/css/')));
+app.use('/jquery', express.static(path.join(__dirname + '/node_modules/jquery/dist/')));
+app.use('/font-awesome', express.static(path.join(__dirname + '/node_modules/@fortawesome/fontawesome-free/js/')));
+app.use('/moment', express.static(path.join(__dirname + '/node_modules/moment/min/')));
+
 app.use(express.urlencoded({
   extended: false
 })); // bodyParser
