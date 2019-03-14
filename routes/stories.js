@@ -70,9 +70,9 @@ router.get("/", (req, res) => {
       // console.log(results);
       if (err) throw err;
       res.render("stories", {
-        results: results,
-        moment: moment,
-        page: "stories"
+        results,
+        moment,
+        displaySearchForm: true
       });
     });
   }
@@ -126,8 +126,7 @@ router.get("/:id", isLoggedIn, (req, res) => {
       if (err) throw err;
       res.render("stories/show", {
         story: foundedStory,
-        comments: foundedComments,
-        page: "story"
+        comments: foundedComments
       });
     });
   });

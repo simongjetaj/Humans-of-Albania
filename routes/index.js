@@ -8,12 +8,13 @@ const express = require("express"),
 const db = require("../db/db");
 
 router.get("/", (req, res) => {
-  res.render("index");
+  res.render("index", {
+    page: "index"
+  });
 });
 
 router.get("/login", (req, res) => {
   res.render("login", {
-    page: "login",
     hiddenStoryId: req.query.storyId,
     message: req.flash("error")
   });
@@ -28,9 +29,7 @@ router.post("/login", (req, res) => {
 });
 
 router.get("/register", (req, res) => {
-  res.render("register", {
-    page: "register"
-  });
+  res.render("register");
 });
 
 router.post("/register", (req, res) => {

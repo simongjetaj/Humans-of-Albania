@@ -1,3 +1,10 @@
+require("../../node_modules/bulma/css/bulma.min.css");
+require("../css/styles.css");
+
+require("../../node_modules/jquery/dist/jquery.min.js");
+const moment = require("../../node_modules/moment/min/moment.min.js");
+require("../../node_modules/@fortawesome/fontawesome-free/js/all.min.js");
+
 // MODALS FUNCTIONALITY
 const modalBtns = document.querySelectorAll(".modalBtn"),
   closeBtns = document.querySelectorAll(".closeBtn"),

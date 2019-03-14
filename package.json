@@ -4,8 +4,8 @@
   "description": "A blog application from scratch using Node.js, Express, MySQL, Bulma, jQuery and Ajax.",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "webpack && nodemon app.js",
+    "build": "webpack --mode production"
   },
   "author": "Simon S. Gjetaj <gjetajsimon@gmail.com>",
   "license": "MIT",
@@ -30,6 +30,18 @@
     "validator": "^10.11.0"
   },
   "devDependencies": {
-    "nodemon": "^1.18.10"
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "babel-loader": "^8.0.5",
+    "css-loader": "^2.1.1",
+    "file-loader": "^3.0.1",
+    "mini-css-extract-plugin": "^0.5.0",
+    "nodemon": "^1.18.10",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "style-loader": "^0.23.1",
+    "uglifyjs-webpack-plugin": "^2.1.2",
+    "url-loader": "^1.1.2",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3"
   }
 }
