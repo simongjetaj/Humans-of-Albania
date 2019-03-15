@@ -80,14 +80,14 @@ function handleCreateStory(e) {
       <div class="card">
         <div class="card-image">
           <figure class="image is-4by3">
-            <img src="${data[0].image ? data[0].image : 'https://bulma.io/images/placeholders/1280x960.png'}" alt="">
+            <img src="${data[0].image ? data[0].image : 'https://bulma.io/images/placeholders/1280x960.png'}" alt="Story Image">
           </figure>
         </div>
         <div class="card-content">
           <div class="media">
             <div class="media-left">
               <figure class="image is-48x48">
-                <img src="https://bulma.io/images/placeholders/96x96.png" alt="">
+                <img src="https://bulma.io/images/placeholders/96x96.png" alt="User Image">
               </figure>
             </div>
             <div class="media-content">
@@ -98,14 +98,16 @@ function handleCreateStory(e) {
 
           <div class="content">
             <p class="left">${data[0].story.substring(0, 100) + "..."}</p>
-            <time datetime="2016-1-1">${moment(data[0].created_at).format(
-              "LLL"
-            )}</time>
+            <time datetime="2016-1-1">
+              <small>${moment(data[0].created_at).format("LLL")}</small>
+            </time>
           </div>
-          <a href="stories/${
-            data[0].storyId
-          }" class="button is-dark"><span class="icon"><i class="fas fa-eye"></i></span>
-          <span>Read More</span></a>
+          <div class="has-text-centered">
+            <a href="stories/${data[0].storyId}" class="button is-dark">
+              <span class="icon"><i class="fas fa-eye"></i></span>
+              <span>Read More</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -219,15 +221,19 @@ function searchStories(e) {
             </div>
 
             <div class="content">
-              <div>${story.story.substring(0, 100) + "..."}</div>
-              <time datetime="2016-1-1">${story.created_at
-                .toString()
-                .substring(0, 16)}</time>
+              <p class="left">${story.story.substring(0, 100) + "..."}</p>
+              <time datetime="2016-1-1">
+                <small>${moment(story.created_at).format("LLL")}</small>
+              </time>
             </div>
-            <a href="stories/${story.id}" class="button is-dark">Read More</a>
+            <div class="has-text-centered">
+              <a href="stories/${story.id}" class="button is-dark">
+                <span class="icon"><i class="fas fa-eye"></i></span>
+                <span>Read More</span>
+              </a>
+            </div>
           </div>
         </div>
-
       </div>
       `;
 

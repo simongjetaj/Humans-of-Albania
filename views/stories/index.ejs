@@ -45,15 +45,20 @@
               <%= result.stories.story.substring(0, 100)+'...' %>
             </p>
             <time datetime="2016-1-1">
-              <%= moment(result.stories.created_at).format('LLL'); %></time>
+              <small>
+                <%= moment(result.stories.created_at).format('LLL'); %>
+              </small>
+            </time>
           </div>
           <% if (currentUser) { %>
-          <a href="stories/<%= result.stories.id %>" class="button is-dark">
-            <span class="icon"><i class="fas fa-eye"></i></span>
-            <span>Read More</span>
-          </a>
+          <div class="has-text-centered">
+            <a href="stories/<%= result.stories.id %>" class="button is-dark">
+              <span class="icon"><i class="fas fa-eye"></i></span>
+              <span>Read More</span>
+            </a>
+          </div>
           <% } else { %>
-          <form method="GET" action="login">
+          <form method="GET" action="login" class="has-text-centered">
             <input type="hidden" name="storyId" value="<%= result.stories.id %>">
             <button type="submit" class="button is-dark">
               <span class="icon"><i class="fas fa-eye"></i></span>
