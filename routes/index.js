@@ -1,7 +1,6 @@
 const express = require("express"),
   router = express.Router(),
-  bcrypt = require("bcrypt"),
-  saltRounds = 10,
+  bcrypt = require("bcryptjs"),
   passport = require("passport"),
   validator = require("validator");
 
@@ -52,28 +51,29 @@ router.post("/register", (req, res) => {
 
   const sql = "INSERT INTO users (username, email, password) VALUES(?, ?, ?)";
 
-  bcrypt.hash(password, saltRounds, (err, hashPassword) => {
-    db.query(sql, [username, email, hashPassword], (err, results, fields) => {
-      if (err) {
-        req.flash("error", err.message);
-        return res.redirect("back");
-      }
-      const sql2 = "SELECT id, username FROM users WHERE id = ?";
-      db.query(sql2, [results.insertId], (err, user) => {
+  var salt = bcrypt.genSalt(10, (err, salt) =>
+    bcrypt.hash(password, salt, (err, hashPassword) => {
+      db.query(sql, [username, email, hashPassword], (err, results, fields) => {
         if (err) {
           req.flash("error", err.message);
           return res.redirect("back");
         }
-        const registeredUser = {
-          user_id: user[0].id,
-          username: user[0].username
-        };
-        req.login(registeredUser, err => {
-          res.redirect("/stories");
-        }); // passport login function
+        const sql2 = "SELECT id, username FROM users WHERE id = ?";
+        db.query(sql2, [results.insertId], (err, user) => {
+          if (err) {
+            req.flash("error", err.message);
+            return res.redirect("back");
+          }
+          const registeredUser = {
+            user_id: user[0].id,
+            username: user[0].username
+          };
+          req.login(registeredUser, err => {
+            res.redirect("/stories");
+          }); // passport login function
+        });
       });
-    });
-  });
+    }));
 });
 
 router.get("/logout", (req, res) => {
