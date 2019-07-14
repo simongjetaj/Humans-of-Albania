@@ -48,11 +48,11 @@ router.get("/", (req, res) => {
 
   if (req.query.search) {
     const sql =
-      `SELECT s.id, s.title, s.story, s.image, u.username, s.created_at 
-      FROM stories s 
-      INNER JOIN users u 
-      ON s.user_id = u.id 
-      WHERE (s.title LIKE ? OR s.story LIKE ? OR u.username LIKE ?) 
+      `SELECT s.id, s.title, s.story, s.image, u.username, s.created_at
+      FROM stories s
+      INNER JOIN users u
+      ON s.user_id = u.id
+      WHERE (s.title LIKE ? OR s.story LIKE ? OR u.username LIKE ?)
       ORDER BY s.created_at DESC`;
     db.query(
       sql,
@@ -68,9 +68,9 @@ router.get("/", (req, res) => {
     );
   } else {
     const options = {
-      sql: `SELECT stories.id, stories.title, stories.story, stories.image, users.username, stories.created_at 
-      FROM stories 
-      INNER JOIN users ON stories.user_id = users.id 
+      sql: `SELECT stories.id, stories.title, stories.story, stories.image, users.username, stories.created_at
+      FROM stories
+      INNER JOIN users ON stories.user_id = users.id
       ORDER BY stories.created_at DESC`,
       nestTables: true
     };
@@ -108,9 +108,9 @@ router.post("/", isLoggedIn, (req, res) => {
           throw err;
         } else {
           const sql2 =
-            `SELECT stories.id AS storyId, stories.title, stories.story, stories.image, users.username, stories.created_at 
-            FROM stories 
-            INNER JOIN users 
+            `SELECT stories.id AS storyId, stories.title, stories.story, stories.image, users.username, stories.created_at
+            FROM stories
+            INNER JOIN users
             ON stories.user_id = users.id WHERE stories.id = ?`;
           db.query(sql2, [results.insertId], (err, newStory) => {
             if (err) throw err;
@@ -123,17 +123,17 @@ router.post("/", isLoggedIn, (req, res) => {
 });
 
 router.get("/:id", isLoggedIn, (req, res) => {
-  const sql = `SELECT s.id AS storyId, s.title, s.story, s.image, u.id AS userId, u.username, s.created_at 
-  FROM stories AS s 
-  INNER JOIN users AS u ON s.user_id = u.id 
+  const sql = `SELECT s.id AS storyId, s.title, s.story, s.image, u.id AS userId, u.username, s.created_at
+  FROM stories AS s
+  INNER JOIN users AS u ON s.user_id = u.id
   WHERE s.id = ?`;
   db.query(sql, [req.params.id], (err, foundedStory) => {
     if (err || foundedStory.length === 0) res.redirect("/stories");
 
-    const sql2 = `SELECT c.id, 
+    const sql2 = `SELECT c.id,
                     c.username,
                     c.comment
-                    FROM stories s 
+                    FROM stories s
                   INNER JOIN comments c ON s.id = c.post_id
                   WHERE s.id = ?`;
     db.query(sql2, [req.params.id], (err, foundedComments) => {
@@ -179,20 +179,21 @@ router.put("/:id", isLoggedIn, (req, res) => {
 
 router.delete("/:id", isLoggedIn, (req, res) => {
   if (req.body.storyImagePath) {
-    fs.unlink(req.body.storyImagePath, (err) => {
+    fs.unlink(normalize("./" + req.body.storyImagePath), (err) => {
       if (err) {
         res.statusMessage = err;
         res.status(500).end();
       }
     });
+
+    const sql = `DELETE FROM stories WHERE id = ?`;
+    db.query(sql, [req.params.id], (err, foundedStory) => {
+      if (err) {
+        throw err;
+      }
+      res.json(foundedStory);
+    });
   }
-  const sql = `DELETE FROM stories WHERE id = ?`;
-  db.query(sql, [req.params.id], (err, foundedStory) => {
-    if (err) {
-      throw err;
-    }
-    res.json(foundedStory);
-  });
 });
 
 module.exports = router;

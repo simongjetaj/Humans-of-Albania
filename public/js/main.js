@@ -102,9 +102,6 @@ $(document).ready(() => {
     e.preventDefault();
 
     const formData = new FormData(this);
-    for (var key of formData.entries()) {
-      console.log(key[0] + ', ' + key[1]);
-    }
     const actionUrl = $(this).attr("action");
     $.ajax({
       url: actionUrl,
