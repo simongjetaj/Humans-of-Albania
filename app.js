@@ -12,7 +12,7 @@ const indexRoutes = require("./routes/index"),
   storiesRoutes = require("./routes/stories"),
   commentRoutes = require("./routes/comments");
 
-const PORT = parseInt(process.env.PORT, 10) || 3000;
+const PORT = parseInt(process.env.PORT, 10) || 1111;
 
 require("./config/passport")(passport);
 
