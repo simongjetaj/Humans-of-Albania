@@ -1,0 +1,16 @@
+<% if (typeof page !== 'undefined' && page === 'stories') { %>
+<footer class="has-text-centered">
+  <%- include ('copyright') %>
+</footer>
+<% } %>
+
+<% if (typeof page !== 'undefined' && page === 'login' || typeof page !== 'undefined' && page === 'register') { %>
+<footer class="fixed-footer center">
+  <%- include ('copyright') %>
+</footer>
+<% } %>
+
+<script src="/public/dist/scripts.bundle.js"></script>
+</body>
+
+</html>

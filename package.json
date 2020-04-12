@@ -1,0 +1,48 @@
+{
+  "name": "humans-of-albania",
+  "version": "1.0.0",
+  "description": "A blog application from scratch using Node.js, Express, MySQL, Bulma, jQuery and Ajax.",
+  "main": "app.js",
+  "scripts": {
+    "dev": "webpack --watch & nodemon app.js",
+    "prod": "webpack --mode production & node app"
+  },
+  "author": "Simon S. Gjetaj <gjetajsimon@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.13.0",
+    "bcryptjs": "^2.4.3",
+    "bulma": "^0.8.2",
+    "connect-flash": "^0.1.1",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.2",
+    "express": "^4.17.1",
+    "express-mysql-session": "^2.1.4",
+    "express-session": "^1.17.1",
+    "jquery": "^3.5.0",
+    "moment": "^2.24.0",
+    "multer": "^1.4.2",
+    "mysql": "^2.18.1",
+    "normalize-path": "^3.0.0",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "randomstring": "^1.1.5",
+    "serialize-javascript": "^3.0.0",
+    "validator": "^13.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "babel-loader": "^8.1.0",
+    "concurrently": "^5.2.0",
+    "css-loader": "^3.5.3",
+    "file-loader": "^6.0.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "nodemon": "^2.0.3",
+    "style-loader": "^1.2.1",
+    "terser-webpack-plugin": "^2.3.6",
+    "url-loader": "^4.1.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  }
+}

@@ -1,0 +1,45 @@
+<nav class="navbar primary is-fixed-top" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <strong class="navbar-item has-text-white"><u>Humans of Albania</u></strong>
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="open">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="open" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" href="/">Home</a>
+      <a class="navbar-item" href="/stories">Stories</a>
+    </div>
+
+    <div class="navbar-end">
+      <% if (typeof displaySearchForm !== 'undefined' && displaySearchForm === true) { %>
+      <div class="navbar-item">
+        <div class="field has-addons">
+          <div class="control has-icons-left">
+            <input class="input" type="search" name="search" id="search" placeholder="Search Story..." />
+            <span class="icon is-small is-left">
+              <i class="fas fa-search"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+      <% } %>
+
+      <div class="navbar-item">
+        <div class="field is-grouped">
+          <% if(!currentUser) { %>
+          <a class="navbar-item" href="/login">Login</a>
+          <a class="navbar-item" href="/register">Register</a>
+          <% } else { %>
+          <span class="navbar-item has-text-white">Hello,
+            <%= currentUser.username %>!</span>
+          <a class="navbar-item" href="/logout">Logout</a>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

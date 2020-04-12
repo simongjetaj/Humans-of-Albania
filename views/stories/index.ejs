@@ -1,0 +1,130 @@
+<%- include ('../partials/header') %>
+<%- include ('../partials/navbar') %>
+
+<section class="hero is-dark">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">It's Your Turn!</h1>
+      <button class="modalBtn button primary is-rounded" data-modal="newStoryModal" data-notloggedin="<%= !currentUser ? 'true' : 'false' %>">
+        Tell Us Your Story
+      </button>
+    </div>
+  </div>
+</section>
+
+<div class="container is-fluid mb">
+  <div class="columns is-multiline">
+    <% results.forEach(result => { %>
+    <div class="column is-one-quarter-desktop is-one-third-tablet">
+      <div class="card">
+        <div class="card-image">
+          <figure class="image is-4by3">
+            <img src="<%= result.stories.image ? result.stories.image : 'https://bulma.io/images/placeholders/1280x960.png' %>"
+              alt="Story Image" />
+          </figure>
+        </div>
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <figure class="image is-48x48">
+                <img src="https://bulma.io/images/placeholders/96x96.png" alt="" />
+              </figure>
+            </div>
+            <div class="media-content">
+              <p class="title is-6">
+                <%= result.stories.title.substring(0, 25) %>
+              </p>
+              <p class="subtitle is-7">@
+                <%= result.users.username %>
+              </p>
+            </div>
+          </div>
+
+          <div class="content">
+            <p class="left">
+              <%= result.stories.story.substring(0, 100)+'...' %>
+            </p>
+            <time datetime="2016-1-1">
+              <small>
+                <%= moment(result.stories.created_at).format('LLL'); %>
+              </small>
+            </time>
+          </div>
+          <% if (currentUser) { %>
+          <div class="has-text-centered">
+            <a href="stories/<%= result.stories.id %>" class="button is-dark">
+              <span class="icon"><i class="fas fa-eye"></i></span>
+              <span>Read More</span>
+            </a>
+          </div>
+          <% } else { %>
+          <form method="GET" action="login" class="has-text-centered">
+            <input type="hidden" name="storyId" value="<%= result.stories.id %>">
+            <button type="submit" class="button is-dark">
+              <span class="icon"><i class="fas fa-eye"></i></span>
+              <span>Read More</span>
+            </button>
+          </form>
+          <% } %>
+        </div>
+      </div>
+    </div>
+    <% }); %>
+  </div>
+</div>
+
+<div id="newStoryModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="closeBtn">&times;</span>
+      <h2>Create Your Story</h2>
+    </div>
+
+    <div class="modal-body">
+      <form action="/stories" method="POST" id="newStoryForm" enctype="multipart/form-data">
+        <div class="row">
+          <label for="title"><strong>Title <span class="has-text-danger">&ast;</span></strong></label>
+          <input type="text" id="title" name="title" />
+        </div>
+
+        <div class="row">
+          <label for="story"><strong>Story <span class="has-text-danger">&ast;</span></strong><span class="micro"><i
+                class="fas fa-microphone"></i></span></label>
+          <textarea id="story" rows="7" name="story"></textarea>
+        </div>
+
+        <div class="row">
+          <label for="image"><strong>Image</strong></label>
+          <div class="file has-name">
+            <label class="file-label">
+              <input class="file-input" type="file" name="image" id="image" accept="image/*">
+              <span class="file-cta customImage">
+                <span class="file-icon">
+                  <i class="fas fa-upload"></i>
+                </span>
+                <span class="file-label">
+                  Choose an image...
+                </span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="cancel">
+            <i class="fas fa-times"></i> Cancel
+          </button>
+          <button type="submit" class="create">
+            <i class="fas fa-plus"></i> Create
+          </button>
+          <%
+          if(currentUser) { %>
+          <input type="hidden" name="user_id" id="user_id" value="<%= currentUser.user_id %>" />
+          <% } %>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<%- include ('../partials/footer') %>

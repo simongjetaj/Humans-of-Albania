@@ -1,0 +1,286 @@
+:root {
+  --btnPrimary: #ee534a;
+  --btnSecondary: #ffab91;
+}
+
+.hero-body .container {
+  text-align: center;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #f4f4f4;
+  width: 100%;
+  margin: 5rem auto;
+  max-width: 600px;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
+  animation: openmodal 0.6s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+
+.modal-header {
+  padding: 1rem;
+  text-align: center;
+  background-color: var(--btnPrimary);
+  color: #fff;
+}
+
+.modal-header h2 {
+  margin: 0;
+}
+
+.modal-body>form .row {
+  padding: 1rem 1.4rem;
+  text-align: center;
+}
+
+.modal-body label {
+  display: block;
+  text-align: left;
+}
+
+.customImage {
+  background-color: #363636;
+  color: #fff;
+}
+
+.modal-body input[type="text"],
+.modal-body textarea {
+  border: 1px solid var(--btnPrimary);
+  width: 100%;
+  border-radius: 0.25rem;
+  font-size: 1.2rem;
+}
+
+.modal-body input[type="text"]:focus,
+.modal-body textarea:focus,
+input.input:focus {
+  outline: none;
+  box-shadow: 0px 0px 8px var(--btnPrimary);
+}
+
+.modal-body input[type="text"] {
+  height: 2rem;
+}
+
+span.file-name {
+  float: right;
+}
+
+.modal-footer {
+  padding: 0.8rem;
+  text-align: right;
+  color: #fff;
+  background-color: var(--btnSecondary);
+}
+
+.cancel,
+.create {
+  border: 0;
+  background-color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cancel {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.cancel:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  transition: background-color 1s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.create:hover {
+  background-color: var(--btnPrimary);
+  color: #fff;
+  transition: color 1s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@keyframes openmodal {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.closeBtn {
+  color: #fff;
+  font-size: 30px;
+  cursor: pointer;
+  float: right;
+  line-height: 1;
+  margin-top: -0.28rem;
+}
+
+.closeBtn:hover,
+.closeBtn:focus {
+  color: #001;
+}
+
+.hero {
+  margin: 3.5rem 0 0.5rem 0;
+}
+
+.section.mt {
+  margin-top: 2.5rem;
+}
+
+.left {
+  text-align: left;
+}
+
+.columns.mt {
+  margin-top: 6rem;
+}
+
+.bottom {
+  margin-top: 0.8rem;
+  float: left;
+}
+
+form.left {
+  display: inline;
+}
+
+button.primary {
+  background-color: var(--btnPrimary);
+  color: #fff;
+}
+
+nav.primary,
+button.primary,
+nav a.navbar-item,
+.navbar-menu,
+a.primary {
+  background-color: var(--btnPrimary);
+}
+
+a.primary {
+  padding: 0.8rem;
+  color: #fff;
+  display: inline-block;
+  text-decoration: none;
+  margin-top: 1rem;
+  border-radius: 0.25rem;
+  -webkit-clip-path: polygon(40% 0%,
+    40% 20%,
+    100% 20%,
+    100% 80%,
+    40% 80%,
+    40% 100%,
+    0% 50%);
+  clip-path: polygon(40% 0%,
+    40% 20%,
+    100% 20%,
+    100% 80%,
+    40% 80%,
+    40% 100%,
+    0% 50%);
+}
+
+nav strong.navbar-item {
+  color: #424242;
+}
+
+nav a.navbar-item {
+  color: #fff;
+}
+
+button.primary:hover,
+button.primary:focus {
+  color: #fff;
+}
+
+.micro {
+  float: right;
+  cursor: pointer;
+}
+
+.micro:hover {
+  color: #000;
+}
+
+.mb {
+  margin-bottom: 4rem;
+}
+
+#editCommentForm {
+  display: none;
+}
+
+#search:focus {
+  border: none;
+  box-shadow: inset 1px 1px 5px #000;
+}
+
+.back {
+  margin-top: 1rem;
+  float: left;
+  color: var(--btnSecondary);
+  font-size: 1.2rem;
+  text-indent: -5rem;
+}
+
+.back:hover {
+  color: var(--btnPrimary);
+}
+
+.notification {
+  margin: 4rem 0 -3rem 0;
+}
+
+.center {
+  text-align: center;
+}
+
+footer {
+  padding: 1.5em;
+}
+
+.fixed-footer {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+
+.footer-link {
+  color: #363636;
+}
+
+.media-content {
+  overflow: hidden;
+}
+
+.footer-link:hover {
+  box-shadow: inset 0 0.6px 0 var(--btnPrimary),
+    inset 0 -0.6px 0 var(--btnPrimary);
+}
+
+@media (max-width: 960px) {
+  .container {
+    padding: 0 3rem 0 3rem;
+  }
+}
+
+@media (max-width: 500px) {
+  html {
+    font-size: 0.8rem;
+  }
+}

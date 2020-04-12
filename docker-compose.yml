@@ -1,0 +1,52 @@
+version: '3.7'
+
+services:
+  db:
+    build:
+      context: .
+      dockerfile: docker/images/mysql/Dockerfile
+    image: simongjetaj/humans-db
+    container_name: db-container
+    ports:
+      - '3306:3306'
+    command: --max_allowed_packet=32505856
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - back-end
+
+  web:
+    build:
+      context: .
+      dockerfile: docker/images/app/Dockerfile
+    image: simongjetaj/humans-of-albania
+    container_name: web-container
+    ports:
+      - '1111:1111'
+    expose:
+      - '1111'
+    restart: unless-stopped
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - db
+    networks:
+      - front-end
+      - back-end
+
+volumes:
+  db-data:
+    driver: local
+  storyImageUploads:
+  images:
+
+networks:
+  front-end:
+  back-end:

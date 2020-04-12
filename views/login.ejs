@@ -1,0 +1,47 @@
+<%- include ('./partials/header') %>
+<%- include ('./partials/navbar') %>
+
+<div class="columns mt is-mobile is-centered">
+  <div class="column is-4-widescreen is-4-fullhd is-4-desktop is-4-tablet is-8-mobile">
+    <%- include ('./partials/messages') %>
+    <form action="/login" method="POST" id="loginForm">
+      <div class="field">
+        <label for="lUsername" class="label">Username</label>
+        <div class="control has-icons-left has-icons-right">
+          <input class="input" type="text" placeholder="Enter Username" name="username" id="lUsername" />
+          <span class="icon is-small is-left">
+            <i class="fas fa-user"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="lPassword" class="label">Password</label>
+        <div class="control has-icons-left has-icons-right">
+          <input class="input" type="password" placeholder="Enter Password" name="password" id="lPassword" />
+          <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="field is-grouped is-pulled-right">
+        <div class="control">
+          <a href="/stories" class="button is-outlined">
+            <span class="icon"><i class="fas fa-times"></i></span>
+            <span>Cancel</span>
+          </a>
+        </div>
+        <div class="control">
+          <button type="submit" class="button primary">
+            <span class="icon"><i class="fas fa-sign-in-alt"></i></span>
+            <span>Login</span>
+          </button>
+        </div>
+        <input type="hidden" name="hiddenStoryId" value="<%= hiddenStoryId %>">
+      </div>
+    </form>
+  </div>
+</div>
+
+<%- include ('./partials/footer') %>

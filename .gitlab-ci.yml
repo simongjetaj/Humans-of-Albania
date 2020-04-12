@@ -1,0 +1,30 @@
+image: docker:stable
+
+services:
+  - docker:dind
+
+before_script:
+  - echo "$CI_REGISTRY_PASSWORD" | docker login --username $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+
+variables:
+  NG_ENV: 'prod'
+
+stages:
+  - build
+
+mysql:
+  stage: build
+  script:
+    - docker pull ${CI_REGISTRY_USER}/humans-db || true
+    - docker build -t ${CI_REGISTRY_USER}/humans-db
+      -f docker/images/mysql/Dockerfile .
+    - docker push ${CI_REGISTRY_USER}/humans-db
+
+app:
+  stage: build
+  script:
+    - docker pull ${CI_REGISTRY_USER}/humans-of-albania || true
+    - docker build -t ${CI_REGISTRY_USER}/humans-of-albania
+      --build-arg NG_ENV=${NG_ENV}
+      -f docker/images/app/Dockerfile .
+    - docker push ${CI_REGISTRY_USER}/humans-of-albania
