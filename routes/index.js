@@ -44,6 +44,7 @@ router.post("/register", (req, res) => {
     req.flash("error", "Please, enter a valid email!");
     return res.redirect("back");
   }
+
   if (!validator.equals(password, confirmPassword)) {
     req.flash("error", "Password does not match the confirm password!");
     return res.redirect("back");
@@ -55,7 +56,7 @@ router.post("/register", (req, res) => {
     bcrypt.hash(password, salt, (err, hashPassword) => {
       db.query(sql, [username, email, hashPassword], (err, results, fields) => {
         if (err) {
-          req.flash("error", err.message);
+          req.flash("error", "Something went wrong while registering the user!");
           return res.redirect("back");
         }
         const sql2 = "SELECT id, username FROM users WHERE id = ?";
@@ -70,7 +71,7 @@ router.post("/register", (req, res) => {
           };
           req.login(registeredUser, err => {
             res.redirect("/stories");
-          }); 
+          });
         });
       });
     }));

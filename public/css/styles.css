@@ -231,11 +231,10 @@ button.primary:focus {
 }
 
 .back {
-  margin-top: 1rem;
-  float: left;
   color: var(--btnSecondary);
   font-size: 1.2rem;
-  text-indent: -5rem;
+  left: 1.5rem;
+  position: absolute;
 }
 
 .back:hover {

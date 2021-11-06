@@ -2,7 +2,7 @@ const path = require("path"),
   webpack = require("webpack"),
   TerserPlugin = require('terser-webpack-plugin'),
   MiniCssExtractPlugin = require("mini-css-extract-plugin");
-  
+
 module.exports = {
   optimization: {
     minimize: true,
@@ -18,7 +18,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "styles.bundle.css",
     }),
-    new webpack.IgnorePlugin(/\.\/locale$/),
+    new webpack.IgnorePlugin({ resourceRegExp: /\.\/locale$/ }),
     new webpack.ProvidePlugin({
       $: "jquery",
       jQuery: "jquery"
